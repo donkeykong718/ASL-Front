@@ -59,3 +59,6 @@
 
 ### Wireframe
 <img width="984" alt="ASL_wireframe" src="https://user-images.githubusercontent.com/114048369/229173073-89ee0566-5de2-42cc-bc6e-6d6cc1edf167.png">
+
+### Component Tree
+<img width="646" alt="ASL_ComponentTree" src="https://user-images.githubusercontent.com/114048369/229202282-1f303368-a769-44da-bbcc-dbc340211f34.png">
