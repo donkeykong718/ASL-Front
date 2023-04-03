@@ -105,3 +105,9 @@ a {
     color-scheme: dark;
   }
 }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

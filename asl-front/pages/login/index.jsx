@@ -1,7 +1,11 @@
 import React from 'react'
+import Login from '../../src/components/Login'
+import './Login.css'
 
 export default function page() {
   return (
-    <div>login</div>
+    <div>
+      <Login />
+      </div>
   )
 }
