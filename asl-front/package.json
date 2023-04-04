@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "98.css": "^0.1.20",
-    "draft-js": "^0.11.7",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
