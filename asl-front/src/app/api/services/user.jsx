@@ -4,7 +4,7 @@ const LOCALSTORAGE_KEY = 'token'
 
 export const getUser = async (id) => {
   try {
-    const response = await api.get(`/api/user/${id}`);
+    const response = await api.get(`/users/${id}`);
     return response.data;
   } catch (error) {
     throw error;
@@ -13,7 +13,7 @@ export const getUser = async (id) => {
 
 export const signup = async (username, password) => {
   try {
-    const response = await api.post("/api/user/sign-up/", { username, password });
+    const response = await api.post("/users/sign-up/", { username, password });
     localStorage.setItem(LOCALSTORAGE_KEY, response.data);
 
     return response.data;
@@ -26,7 +26,7 @@ export const signup = async (username, password) => {
 
 export const signin = async (username, password) => {
   try {
-    const response = await api.post("/api/user/sign-in/", { username, password });
+    const response = await api.post("/users/sign-in/", { username, password });
     localStorage.setItem(LOCALSTORAGE_KEY, response.data);
     console.log('Sign in returns:')
     console.log(response);

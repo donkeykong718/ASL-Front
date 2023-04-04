@@ -3,8 +3,8 @@ import axios from "axios";
 let apiUrl;
 
 const apiUrls = {
-  production: "www.deployedLink.com",
-  development: "http://localhost:3000",
+  production: "https://asl-back.herokuapp.com",
+  development: "https://asl-back.herokuapp.com"
 };
 
 if (window.location.hostname === "localhost") {
