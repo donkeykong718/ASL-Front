@@ -16,17 +16,9 @@ const ReactQuill = dynamic(import('react-quill'), {
 
 const modules = {
   toolbar: [
-    [{ header: '1' }, { header: '2' }, { font: [] }],
-    [{ size: [] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [
-      { list: 'ordered' },
-      { list: 'bullet' },
-      { indent: '-1' },
-      { indent: '+1' },
-    ],
-    ['link', 'image', 'video'],
-    ['clean'],
+    [{ font: [] }],
+    [{ color: ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466", 'custom-color'] }],
+    ['bold', 'italic', 'underline']
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
@@ -38,23 +30,16 @@ const modules = {
  * See https://quilljs.com/docs/formats/
  */
 const formats = [
-  'header',
   'font',
-  'size',
+  'color',
   'bold',
   'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'video',
+  'underline'
 ]
 
 export default function Chatroom() {
+
+  const [value, setValue] = useState('');
 
   const activeUsers = [{ username: 'FakeUser' }, { username: 'FakeUser2' }]
   const messages = [{ author: 'FakeUser', text: 'Test' }, { author: 'FakeUser2', text: 'Test2' }]
@@ -66,7 +51,7 @@ export default function Chatroom() {
           <div className={styles.chatWindow}>
             {messages.map((message, index) => (<ChatLine message={message} key={index} />))}
           </div>
-          <ReactQuill modules={modules} formats={formats} theme="snow" />
+          <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
         </div>
         <div className={styles.buddyCol}>
           <header>## people here</header>

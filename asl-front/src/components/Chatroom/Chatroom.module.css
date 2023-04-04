@@ -157,3 +157,23 @@ You do not need to worry about .error {} colliding with any other `.css` or
   width: 25vw;
   height: 2.78vh;
 }
+
+
+/*!
+ * Quill Editor v1.3.7
+ * https://quilljs.com/
+ * Copyright (c) 2014, Jason Chen
+ * Copyright (c) 2013, salesforce.com
+ */
+.ql-container {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  height: 100%;
+  margin: 0px;
+  position: relative;
+}
+
+.ql-editor {
+  background: white;
+}
