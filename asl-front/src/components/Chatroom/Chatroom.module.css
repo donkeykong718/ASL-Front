@@ -1,0 +1,52 @@
+/*
+You do not need to worry about .error {} colliding with any other `.css` or
+`.module.css` files!
+*/
+/* .error {
+  color: white;
+  background-color: red;
+} */
+/* @import "98.css"; */
+
+.chatContainer {
+  background-color: #fff8ee;
+  margin: 17vh 0 4vh 0;
+  height: 78vh;
+  width: 100vw;
+}
+
+.chatRoom {
+  position: relative;
+  /* border: #8e8d86 1px solid; */
+  /* background-color: #ffffff; */
+  height: 63vh;
+  width: 72.22vw;
+  margin: 1vh 0 0 1vw;
+}
+
+.chatWindow {
+  border: #8e8d86 1px solid;
+  background-color: #ffffff;
+  height: 63vh;
+  width: 72.22vw;
+  /* margin: 1vh 0 0 1vw; */
+}
+
+.toolBar {
+  background-color: #bfbfbf;
+  width: 74.17vw;
+  height: 3.7vh;
+  padding: 2px;
+}
+
+.button {
+  background-color: #cbd2a0;
+  width: 18px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.select {
+  width: 25vw;
+  height: 2.78vh;
+}
