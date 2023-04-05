@@ -1,6 +1,9 @@
+'use client';
+
 // import { useState, useEffect } from 'react'
+import '../../app/globals.css'
 import styles from './Chatroom.module.css'
-// import '98.css'
+import '98.css'
 // import { w3cwebsocket as W3CWebSocket } from "websocket"
 
 // import ReactQuill from "react-quill";
@@ -37,27 +40,60 @@ const formats = [
   'underline'
 ]
 
+let activeUsers = [{ username: 'FakeUser' }, { username: 'FakeUser2' }]
+let messages = [{ author: 'FakeUser', text: 'Test' }, { author: 'FakeUser2', text: 'Test2' }]
+
+const currentUser = 'davidkoll'
+
+if (activeUsers.includes({ username: currentUser }) === false) {
+  activeUsers.push({ username: currentUser })
+}
+
+// const closeButton = document.querySelector(('[aria-label="Close"]'))
+
 export default function Chatroom() {
 
   const [value, setValue] = useState('');
 
-  const activeUsers = [{ username: 'FakeUser' }, { username: 'FakeUser2' }]
-  const messages = [{ author: 'FakeUser', text: 'Test' }, { author: 'FakeUser2', text: 'Test2' }]
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let newText = value;
+    let newMessage = { author: currentUser, text: newText }
+
+    setValue(newMessage);
+    messages.push(newMessage);
+    console.log(messages);
+  }
 
   return (
-    <div>
-      <div className={styles.chatContainer}>
-        <div className={styles.chatCol}>
-          <div className={styles.chatWindow}>
-            {messages.map((message, index) => (<ChatLine message={message} key={index} />))}
-          </div>
-          <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
+    <div className="window">
+      <div className="title-bar">
+        <div className="title-bar-text">
+          <img></img>
+          ASL - ['Chatroom Name' Chat] </div>
+        <div className="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
         </div>
-        <div className={styles.buddyCol}>
-          <header>## people here</header>
-          <div className={styles.buddyList}>
-            {/* Need to input active users. How? */}
-            {activeUsers.map((user, index) => (<ListBuddy user={user} key={index} />))}
+      </div>
+      <div className="window-body">
+        <div className={styles.chatContainer}>
+          <div className={styles.chatCol}>
+            <div className={styles.chatWindow}>
+              {messages.map((message, index) => (<ChatLine message={message} key={index} />))}
+            </div>
+            <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
+            <button className={styles.submitButton} onClick={handleSubmit}>Send!</button>
+
+          </div>
+          <div className={styles.buddyCol}>
+            <p className={styles.userList}>{activeUsers.length} people here</p>
+            <div className={styles.buddyList}>
+              {/* Need to input active users. How? */}
+              {activeUsers.map((user, index) => (<ListBuddy user={user} key={index} />))}
+            </div>
           </div>
         </div>
       </div>
