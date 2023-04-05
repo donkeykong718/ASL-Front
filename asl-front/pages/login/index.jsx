@@ -155,19 +155,19 @@ export default function Login() {
               {/* <button className="submit"></button> */}
             </div>
             <div className="login-bottom-btns">
-              <button
+              {/* <button
                 className="help-btn"
-                // style={{ marginLeft: "10px", marginRight: "18px" }}
+                style={{ marginLeft: "10px", marginRight: "18px", minWidth: "19px" }}
 
-                // style={{ minWidth: "19px" }}
-              >
+                
+              > */}
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAgCAYAAADwvkPPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ2MCwgMjAyMC8wNS8xMi0xNjowNDoxNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkE0MUJGNjFDRkFDQjExRUFBODc3QzI2NzYxRDQzM0U3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkE0MUJGNjFERkFDQjExRUFBODc3QzI2NzYxRDQzM0U3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QTQxQkY2MUFGQUNCMTFFQUE4NzdDMjY3NjFENDMzRTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QTQxQkY2MUJGQUNCMTFFQUE4NzdDMjY3NjFENDMzRTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7Veg3+AAABjUlEQVR42pxVgZGEIAwkN3SkNWlNWpPWlHfV8CEu+H+ZYe4gYVk2ISZVTa2xbZtO06TDMGhKqQzMsQ6/j/+khq3rquM4nv+PjQC2A845DH7ElU2M0bIsJ4P75KbBjzjEYx8FwzXugGKYY8QDsIZ4CuacxTA3nRjj64KaMtNr3/ckItUatDJf03rZZIwja7BsXrOXEKbjawLiuDV5iO4Slb4GiyA25A7u2pEMJVpLXMsugzrPM2oMGknciEq3TNoLoNm0+jliKkFjAvw7Zdd0FX+t4dcH25Pxheqr/gF2OX/XPSB7Eb7qH2DGDteMgG+FSsEswANioPOAtfUvY4p5E6x+MqloaMOSA183AbwFtesYbF1S3jvtwSD1fMdh6LJ1cbMXwCq+03WkC/atfRiTFjOs91h7zWJQ73FTwPzXjhG7hGdovuycjxOx4Q5U979qEj4uR4cDZvqx64l96TNxVJv+k+38VkNEM43SFCncyeqYxblG5gAKrCWTK7K5NHSqfNKqGfbBYGEe7EeAAQAWPp0sUHLiqgAAAABJRU5ErkJggg=="
                   style={{ width: "19 px", height: "32 px" }}
                 />
-              </button>
+              {/* </button> */}
 
-              <button className="setup-button" />
+              {/* <button className="setup-button" /> */}
               <div style={{ minWidth: "25px" }}>
                 {" "}
                 <img
