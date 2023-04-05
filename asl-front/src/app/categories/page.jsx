@@ -1,10 +1,14 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from "react";
 import { SearchbarDropdown } from './SearchbarDropdown'
 import { CategoryScroll } from './Categoryscroll'
 import { RoomList } from './Roomlist'
-
+import * as chatFunctions from '../api/services/chatrooms'
 
 export default function Homepage() {
+
+
   const [options, setOptions] = useState([])
   const [categoryChoice, setCategoryChoice] = useState("")
   const [categoryOption, setCategoryOption] = useState("")
@@ -16,6 +20,15 @@ export default function Homepage() {
         option.toLowerCase().includes(value.toLowerCase()))
     )
   }
+
+  useEffect(() => {
+    const getAllRooms = async () => {
+      const roomList = await chatFunctions.getRooms();
+      console.log(roomList)
+    };
+    getAllRooms();
+  }, []);
+
 
 
   // Simulated db

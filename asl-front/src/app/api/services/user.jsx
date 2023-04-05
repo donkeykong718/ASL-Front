@@ -13,7 +13,7 @@ export const getUser = async (id) => {
 
 export const signup = async (username, password) => {
   try {
-    const response = await api.post("/users/sign-up/", { username, password });
+    const response = await api.post("/users/", { username, password });
     localStorage.setItem(LOCALSTORAGE_KEY, response.data);
 
     return response.data;
