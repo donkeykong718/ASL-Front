@@ -110,6 +110,15 @@ You do not need to worry about .error {} colliding with any other `.css` or
   height: 2vh;
 }
 
+.message {
+  margin: .25em;
+}
+
+.chatUser {
+  color: blue;
+  font-weight: bold;
+}
+
 
 
 /* .chatWindow::-webkit-scrollbar-button:vertical:decrement,
@@ -133,10 +142,17 @@ You do not need to worry about .error {} colliding with any other `.css` or
   display: block;
 } */
 
+.userList {
+  font-weight: bold;
+  font-size: 1.25em;
+  font-family: 'Veranda';
+  margin: 0;
+  align-self: baseline;
+}
+
 .activeUser {
   margin: 0;
 }
-
 
 
 .toolBar {
@@ -174,6 +190,6 @@ You do not need to worry about .error {} colliding with any other `.css` or
   position: relative;
 }
 
-.ql-editor {
-  background: white;
-}
+/* .quill {
+  background-color: white;
+} */
