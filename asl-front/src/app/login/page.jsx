@@ -4,6 +4,8 @@ import React, { useRef, useEffect } from "react";
 import "98.css";
 import "../globals.css";
 import styles from "./Login.module.css";
+import logo from '/public/assets/images/aol-man.png';
+
 
 export default function Login() {
   const windowRef = useRef(null);
@@ -63,33 +65,20 @@ export default function Login() {
 
   return (
     <>
-      
       <div style={{ height: "100px" }}></div>
 
       <div className="flex-container">
+        
         <div className={styles.window}>
-          <div className={styles.titleBar}>
-            <div className={styles.titleBarIcon}>
-              <img className={styles.titleBarIcon}
-                src="/assets/images/aol-man.png"
-                alt=""
-              />
-            <div className={styles.titleBarText}>Sign On</div>
-
-
-            <div className={styles.titleBarControls}>
-              <button className={styles.minimizeButton} aria-label="Minimize">
-                -
-              </button>
-              <button className={styles.maximizeButton} aria-label="Maximize">
-                +
-              </button>
-              <button className={styles.closeButton} aria-label="Close">
-                X
-              </button>
-            </div>
-            </div>
-          </div>
+        <div className="title-bar">
+      <div className="logo-container">
+        <img src={logo} alt="Logo" width={40} height={40} />
+      </div>
+      <div className="title-bar-text">Sign On</div>
+      <div className="title-bar-controls">
+        <button aria-label="Close"></button>
+      </div>
+    </div>
           <div className={styles.windowBody}>
             <div className={styles.aolBox}>
               {/* <div style={{ height: "25px" }}></div> */}
@@ -108,7 +97,7 @@ export default function Login() {
               <div className={styles.ASLTitle}>
                 <div style={{ height: "25px" }}></div>
                 <img
-                  src="/assets/images/ASL-logo-text.png"
+                  src="/assets/images/ASL-logo-text.png.png.png"
                   alt=""
                   style={{
                     margin: "0 auto",
@@ -120,15 +109,14 @@ export default function Login() {
               </div>
             </div>
 
-           <div className={styles.loginFieldRowStacked}>
-  <label htmlFor="text22">Screen Name</label>
-  <input id="text22" type="user" />
-</div>
-<div className={styles.loginFieldRowStacked}>
-  <label htmlFor="text23">Password</label>
-  <input id="text23" type="password" />
-</div>
-
+            <div className={styles.loginFieldRowStacked}>
+              <label htmlFor="text22">Screen Name</label>
+              <input id="text22" type="user" />
+            </div>
+            <div className={styles.loginFieldRowStacked}>
+              <label htmlFor="text23">Password</label>
+              <input id="text23" type="password" />
+            </div>
 
             <div className={styles.loginBottomBtns}>
               <button className={styles.helpBtn}>
@@ -142,19 +130,18 @@ export default function Login() {
               </div>
 
               <button
-  className={styles.signOnBtn}
-  onClick={() => {
-    alert("Sign On button clicked!");
-  }}
->
-  <div style={{ minWidth: "38px" }}>
-    <img
-      src="/assets/images/signon-btn-grey.png"
-      style={{ width: "38px", height: "32px" }}
-    />
-  </div>
-</button>
-
+                className={styles.signOnBtn}
+                onClick={() => {
+                  alert("Sign On button clicked!");
+                }}
+              >
+                <div style={{ minWidth: "38px" }}>
+                  <img
+                    src="/assets/images/signon-btn-grey.png"
+                    style={{ width: "38px", height: "32px" }}
+                  />
+                </div>
+              </button>
             </div>
           </div>
         </div>
