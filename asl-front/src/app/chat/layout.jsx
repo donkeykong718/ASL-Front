@@ -43,8 +43,6 @@ export default function Chatroom({ children }) {
 
 
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
-      {children}
-    </Suspense>
+    { children }
   )
 }
