@@ -11,9 +11,7 @@ import { Suspense } from 'react'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Suspense fallback={<Loading />}>
-        This is loaded now.
-      </Suspense>
+      This is loaded now.
     </main>
   )
 }
