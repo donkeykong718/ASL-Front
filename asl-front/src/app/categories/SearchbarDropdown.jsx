@@ -25,7 +25,7 @@ export const SearchbarDropdown = (props) => {
   }
 
   useEffect(() => {
-    console.log(categoryChoice);
+    // console.log(categoryChoice);
   }, [categoryChoice])
 
   useEffect(() => {
