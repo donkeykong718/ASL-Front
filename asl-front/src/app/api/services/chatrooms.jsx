@@ -11,9 +11,9 @@ export const getRooms = async () => {
 };
 
 
-export const getaRoom = async (id) => {
+export const getaRoom = async (name) => {
   try {
-    const response = await api.get(`/conversations/${id}`);
+    const response = await api.get(`/conversations/${name}`);
     return response.data;
   } catch (error) {
     throw error;
