@@ -17,8 +17,8 @@ You do not need to worry about .error {} colliding with any other `.css` or
   position: relative;
   background-color: #fff8ee;
   margin: 17vh 0 4vh 0;
-  height: 78;
-  width: 100;
+  /* height: 78;
+  width: 100; */
   display: grid;
   grid-template-columns: 3fr 1fr;
   /* grid-template-rows: 1; */

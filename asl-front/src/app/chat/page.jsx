@@ -6,16 +6,16 @@ import styles from './Chatroom.module.css'
 import '98.css'
 // import { w3cwebsocket as W3CWebSocket } from "websocket"
 
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import React, { useState, useEffect } from 'react'
 import dynamic from "next/dynamic";
 import ListBuddy from './ListBuddy';
 import ChatLine from './Chatline';
 
-// const ReactQuill = dynamic(import('react-quill'), {
-//   ssr: false, loading: () => <p>Loading ...</p>
-// })
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false, loading: () => <p>Loading ...</p>
+})
 
 const modules = {
   toolbar: [
