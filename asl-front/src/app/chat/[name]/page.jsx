@@ -76,7 +76,7 @@ export default function Chatroom() {
 
 
   const { readyState, sendJsonMessage } = useWebSocket(
-    user ? `ws://asl-back.herokuapp.com/chats/${roomName}/` : null,
+    user ? `wss://asl-back.herokuapp.com/chats/${roomName}/` : null,
     {
       queryParams: {
         token: user ? user.token : "",
