@@ -24,7 +24,10 @@ export default function Homepage() {
   useEffect(() => {
     const getAllRooms = async () => {
       const roomList = await chatFunctions.getRooms();
-      console.log(roomList)
+      roomList.forEach(room => {
+        const { name } = room
+        console.log(name)
+      })
     };
     getAllRooms();
   }, []);
