@@ -43,6 +43,9 @@ export default function Chatroom({ children }) {
 
 
   return (
-    { children }
+    <>
+      {children}
+    </>
+
   )
 }
