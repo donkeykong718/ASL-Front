@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     console.log(currentUser)
     setUser(currentUser);
     // console.log(currentUser.username);
-    currentUser ? router.push('/home') : router.push('/login')
+    // currentUser ? router.push('/home') : router.push('/login')
   }, [])
 
 
@@ -62,7 +62,10 @@ export default function RootLayout({ children }) {
             </div>
           </div>
           <img id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' />
-          {children}
+          <div className='window-body'>
+            {children}
+          </div>
+          <img id='dummy-toolbar' src='/assets/images/dummy_footer.png' />
         </div>
       </body>
     </html>

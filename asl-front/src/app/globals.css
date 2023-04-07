@@ -1,24 +1,37 @@
 html {
-  position: relative;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
   font-family: 'Arial';
 }
 
 body {
+  position: relative;
   background: url('https://wallpapercave.com/wp/wp11023082.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  width: 98w;
+  height: 98vh;
 }
 
 .window {
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: 90%;
+}
+
+.window-body {
+  min-height: 90%;
+  height: fit-content;
 }
 
 #dummy-toolbar {
   position: relative;
+}
+
+#dummy-footer {
+  position: absolute;
+  justify-self: baseline;
+  width: 100vw;
 }

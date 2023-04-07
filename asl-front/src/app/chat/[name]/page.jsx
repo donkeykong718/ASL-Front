@@ -35,6 +35,9 @@ const formats = [
   'underline'
 ]
 
+const currentUser = 'admin'
+const currentPassword = 'password'
+
 export default function Chatroom() {
 
   const [value, setValue] = useState({});
@@ -47,11 +50,11 @@ export default function Chatroom() {
   const [page, setPage] = useState(2)
 
 
-  const userString = localStorage.getItem("user")
-  const userJSON = JSON.parse(userString)
-  console.log('The user is:')
-  setUser(userJSON);
-  console.log(user)
+  // const userString = localStorage.getItem("user")
+  // const userJSON = JSON.parse(userString)
+  // console.log('The user is:')
+  // setUser(userJSON);
+  // console.log(user)
 
 
   const { name } = useParams();
@@ -63,11 +66,27 @@ export default function Chatroom() {
   const [playClose] = useSound('assets/sounds/doorslam.wav')
 
 
-  useEffect(async () => {
-    const roomInfo = await chatFunctions.getaRoom(name)
-    setRoom(roomInfo);
-    console.log(roomInfo)
-    fetchMessages();
+
+  async function checkPage() {
+    const result = await chatFunctions.getaRoom(name)
+    if (result.status === 200) {
+      const roomInfo = await result.json();
+      setRoom(roomInfo)
+    }
+    else {
+      router.push('/404')
+    }
+  }
+
+  useEffect(() => {
+    async function loadPage() {
+      checkPage();
+      const user = await userFunctions.signin(currentUser, currentPassword)
+      console.log(user)
+      setUser(user);
+      fetchMessages();
+    }
+    loadPage();
   }, [])
 
   const { readyState, sendJsonMessage } = useWebSocket(
