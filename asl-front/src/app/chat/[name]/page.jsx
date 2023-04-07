@@ -13,8 +13,7 @@ import ChatLine from './Chatline';
 import { useParams } from 'next/navigation';
 import * as chatFunctions from '../../api/services/chatrooms'
 import * as userFunctions from '../../api/services/user'
-import * as messageFunctions from '../../api/services/message'
-
+import useSound from 'use-sound';
 
 const modules = {
   toolbar: [
@@ -38,16 +37,8 @@ const formats = [
   'underline'
 ]
 
-// let activeUsers = [{ username: 'FakeUser' }, { username: 'FakeUser2' }]
-// let messages = [{ author: 'FakeUser', text: 'Test' }, { author: 'FakeUser2', text: 'Test2' }]
-
 const currentUser = 'admin'
 const currentPassword = 'password'
-
-
-// if (activeUsers.includes({ username: currentUser }) === false) {
-//   activeUsers.push({ username: currentUser })
-// }
 
 export default function Chatroom() {
 
@@ -60,8 +51,15 @@ export default function Chatroom() {
   const [conversation, setConversation] = useState(null);
   const [page, setPage] = useState(2)
 
+
   const { name } = useParams();
   const roomName = name;
+
+  const [playSend] = useSound('/assets/sounds/imsend.wav')
+  const [playReceive] = useSound('/assets/sounds/imrcv.wav')
+  const [playOpen] = useSound('assets/sounds/dooropen.wav')
+  const [playClose] = useSound('assets/sounds/doorslam.wav')
+
 
   useEffect(async () => {
     const roomInfo = await chatFunctions.getaRoom(name)
@@ -72,8 +70,6 @@ export default function Chatroom() {
     setUser(user);
     fetchMessages();
   }, [])
-
-
 
   const { readyState, sendJsonMessage } = useWebSocket(
     user ? `wss://asl-back.herokuapp.com/chats/${roomName}/` : null,
@@ -102,6 +98,7 @@ export default function Chatroom() {
             setHasMoreMessages(data.has_more);
             break;
           case "user_join":
+            playOpen();
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
                 return [...pcpts, data.user];
@@ -110,6 +107,7 @@ export default function Chatroom() {
             });
             break;
           case "user_leave":
+            playClose();
             setParticipants((pcpts) => {
               const newPcpts = pcpts.filter((x) => x !== data.user);
               return newPcpts;
@@ -136,12 +134,7 @@ export default function Chatroom() {
       message,
     });
     setValue("");
-    // let newMessage = { room: name, from_user: user, content: message }
-
-    // setValue(newMessage);
-    // const sentMessage = await messageFunctions.sendMessage(newMessage);
-    // messages.push(newMessage);
-    // console.log(sentMessage);
+    playSend();
   }
 
   async function fetchMessages() {
@@ -160,34 +153,12 @@ export default function Chatroom() {
       const data = await apiRes.json();
       console.log(data.results[0])
       setHasMoreMessages(data.next !== null);
-      // setPage(page + 1);
       setMessageHistory((prev) => [data.results[0], ...prev]);
       console.log(messageHistory)
     }
   }
 
-  // useEffect(() => {
-  //   async function fetchConversation() {
-  //     const apiRes = await fetch(
-  //       `http://127.0.0.1:8000/conversations/${roomName}/`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //           Authorization: `Token ${user?.token}`,
-  //         },
-  //       }
-  //     );
-  //     if (apiRes.status === 200) {
-  //       const data = await apiRes.json();
-  //       setConversation(data);
-  //     }
-  //   }
-  //   fetchConversation();
-  // }, [roomName, user]);
-
-
+  useEffect(() => { playReceive() }, [messageHistory])
 
   return (
     <div className="window">

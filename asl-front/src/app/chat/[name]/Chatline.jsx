@@ -9,9 +9,9 @@ export default function ChatLine({ message }) {
   const spanText = content?.replace('<p>', '<span className={styles.chatText}>').replace('</p>', '</span>');
   const rtf = Parser(spanText)
 
-  console.log(rtf)
-  // console.log(rtf.childNodes[0]);
-  // console.log(Parser(text))
+  // console.log(rtf)
+  // // console.log(rtf.childNodes[0]);
+  // // console.log(Parser(text))
 
   return (<p className={styles.message}>
     <span className={styles.chatUser}>{from_user.username}: </span>{rtf}</p>
