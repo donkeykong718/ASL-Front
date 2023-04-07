@@ -6,8 +6,8 @@
 }
 
 .window {
-  height: 600px;
-  width: 300px;
+  /* height: 600px;
+  width: 300px; */
   background-color: silver;
   position: absolute;
   top: 50%;
@@ -58,8 +58,8 @@
   font-weight: bold;
   color: white;
   letter-spacing: 0;
-  margin-right: 24px;
-
+  margin-right: 170px;
+  
 }
 
 /* .titleBarControls {
@@ -189,7 +189,7 @@
 
 .helpBtn {
   width: 19px;
-  height: 32px;
+  height: 35px;
   border: none;
   cursor: pointer;
   /* margin-left: 10px;
@@ -201,7 +201,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 31px;
-  /* width: 25px;
+  height: 35px;
+/* width: 25px;
 min-width: 25px; */
 }
