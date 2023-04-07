@@ -1,11 +1,19 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import "98.css";
 import "../globals.css";
 import styles from "./Login.module.css";
+// import { AuthContext } from "../layout";
+import * as userServices from '../api/services/user'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
   const windowRef = useRef(null);
+  // const { auth, setAuth } = useContext(AuthContext)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const router = useRouter();
 
   useEffect(() => {
     const windowElement = windowRef.current;
@@ -63,6 +71,16 @@ export default function Login() {
     }
   }, []);
 
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const response = await userServices.signin(username, password);
+    if (response.username) {
+      // setAuth(true)
+      router.push('/home')
+    }
+    console.log(response);
+  }
+
   return (
     <>
       <div style={{ height: "100px" }}></div>
@@ -103,55 +121,55 @@ export default function Login() {
               </div>
             </div>
 
-            <div className={styles.loginFieldRowStacked}>
-              <label htmlFor="text22">Screen Name</label>
-              <input id="text22" type="user" />
-            </div>
-            <div className={styles.loginFieldRowStacked}>
-              <label htmlFor="text23">Password</label>
-              <input id="text23" type="password" />
-            </div>
-
-            <div className={styles.loginFieldRowStacked}>
-              <input type="checkbox" id="example1" />
-              <label htmlFor="example1">Save Password</label>
-            </div>
-
-            <div className={styles.loginFieldRowStacked}>
-              <input checked type="checkbox" id="example2" />
-              <label htmlFor="example2">Save Password</label>
-            </div>
-
-            <div className={styles.loginFieldRowStacked}>
-              <input disabled type="checkbox" id="example3" />
-              <label htmlFor="example3">Auto-login</label>
-            </div>
-
-            <div className={styles.loginBottomBtns}>
-              <button className={styles.helpBtn}>
-                <img src="/assets/images/helpbtn.png" alt="Help Button" />
-              </button>
-
-              <div className={styles.loginBottomBtns}>
-                <button className={styles.setupBtn}>
-                  <img src="/assets/images/setupbtn.png" alt="Set Up Button" />
-                </button>
+            <form onSubmit={handleSubmit}>
+              <div className={styles.loginFieldRowStacked}>
+                <label htmlFor="text22">Screen Name</label>
+                <input id="text22" type="user" value={username} onChange={e => setUsername(e.target.value)} />
+              </div>
+              <div className={styles.loginFieldRowStacked}>
+                <label htmlFor="text23">Password</label>
+                <input id="text23" type="password" value={password} onChange={e => setPassword(e.target.value)} />
               </div>
 
-              <button
-                className={styles.signOnBtn}
-                onClick={() => {
-                  alert("Sign On button clicked!");
-                }}
-              >
-                <div style={{ minWidth: "38px" }}>
-                  <img
-                    src="/assets/images/green-signon-btn.png"
-                    style={{ height: "35px" }}
-                  />
+              <div className={styles.loginFieldRowStacked}>
+                <input type="checkbox" id="example1" />
+                <label htmlFor="example1">Save Password</label>
+              </div>
+
+              {/* <div className={styles.loginFieldRowStacked}>
+                <input checked type="checkbox" id="example2" />
+                <label htmlFor="example2">Save Password</label>
+              </div> */}
+
+              <div className={styles.loginFieldRowStacked}>
+                <input disabled type="checkbox" id="example3" />
+                <label htmlFor="example3">Auto-login</label>
+              </div>
+
+              <div className={styles.loginBottomBtns}>
+                <button className={styles.helpBtn}>
+                  <img src="/assets/images/helpbtn.png" alt="Help Button" />
+                </button>
+
+                <div className={styles.loginBottomBtns}>
+                  <button className={styles.setupBtn}>
+                    <img src="/assets/images/setupbtn.png" alt="Set Up Button" />
+                  </button>
                 </div>
-              </button>
-            </div>
+
+                <button
+                  className={styles.signOnBtn}
+                // onClick={handleSubmit()}
+                >
+                  <div style={{ minWidth: "38px" }}>
+                    <img
+                      src="/assets/images/green-signon-btn.png"
+                      style={{ height: "35px" }}
+                    />
+                  </div>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

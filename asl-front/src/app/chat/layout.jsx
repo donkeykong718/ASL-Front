@@ -1,6 +1,6 @@
-'use client';
+// 'use client';
 
-import React, { useState, useEffect, Suspense } from 'react'
+// import React, { useState, useEffect, Suspense } from 'react'
 
 export default function Chatroom({ children }) {
 

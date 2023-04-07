@@ -1,9 +1,9 @@
 .chatContainer {
   position: relative;
   background-color: #fff8ee;
-  margin: 17vh 0 4vh 0;
-  height: 78;
-  width: 100;
+  margin: 0;
+  height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 3fr 1fr;
 }

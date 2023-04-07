@@ -1,13 +1,11 @@
 'use client';
 
-import '../../../app/globals.css'
 import styles from '../Chatroom.module.css'
-import '98.css'
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, useEffect } from 'react'
 import ListBuddy from './ListBuddy';
 import ChatLine from './Chatline';
 import { useParams } from 'next/navigation';
@@ -37,9 +35,6 @@ const formats = [
   'underline'
 ]
 
-const currentUser = 'admin'
-const currentPassword = 'password'
-
 export default function Chatroom() {
 
   const [value, setValue] = useState({});
@@ -50,6 +45,13 @@ export default function Chatroom() {
   const [pcpts, setParticipants] = useState([])
   const [conversation, setConversation] = useState(null);
   const [page, setPage] = useState(2)
+
+
+  const userString = localStorage.getItem("user")
+  const userJSON = JSON.parse(userString)
+  console.log('The user is:')
+  setUser(userJSON);
+  console.log(user)
 
 
   const { name } = useParams();
@@ -65,9 +67,6 @@ export default function Chatroom() {
     const roomInfo = await chatFunctions.getaRoom(name)
     setRoom(roomInfo);
     console.log(roomInfo)
-    const user = await userFunctions.signin(currentUser, currentPassword)
-    console.log(user)
-    setUser(user);
     fetchMessages();
   }, [])
 
