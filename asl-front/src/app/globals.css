@@ -5,13 +5,13 @@ html {
 }
 
 body {
-  position: relative;
+  /* position: relative; */
   background: url('https://wallpapercave.com/wp/wp11023082.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  width: 98w;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 .window {
@@ -31,7 +31,9 @@ body {
 }
 
 #dummy-footer {
-  position: absolute;
-  justify-self: baseline;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 0;
   width: 100vw;
 }

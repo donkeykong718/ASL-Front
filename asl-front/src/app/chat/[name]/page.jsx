@@ -8,7 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import React, { useState, useEffect } from 'react'
 import ListBuddy from './ListBuddy';
 import ChatLine from './Chatline';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import * as chatFunctions from '../../api/services/chatrooms'
 import * as userFunctions from '../../api/services/user'
 import useSound from 'use-sound';
@@ -49,6 +49,7 @@ export default function Chatroom() {
   const [conversation, setConversation] = useState(null);
   const [page, setPage] = useState(2)
 
+  const router = useRouter();
 
   // const userString = localStorage.getItem("user")
   // const userJSON = JSON.parse(userString)
@@ -80,7 +81,7 @@ export default function Chatroom() {
 
   useEffect(() => {
     async function loadPage() {
-      checkPage();
+      // checkPage();
       const user = await userFunctions.signin(currentUser, currentPassword)
       console.log(user)
       setUser(user);

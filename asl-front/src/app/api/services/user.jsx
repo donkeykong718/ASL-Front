@@ -24,6 +24,16 @@ export const signup = async (username, password) => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await api.get("/users");
+    return response.data;
+  }
+  catch (error) {
+    throw error
+  }
+}
+
 export const signin = async (username, password) => {
   try {
     const response = await api.post("/token/", { username, password });

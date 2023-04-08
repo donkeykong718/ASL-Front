@@ -1,19 +1,33 @@
 "use client";
+
 import React, { useRef, useState, useEffect, useContext } from "react";
-import "98.css";
-import "../globals.css";
+// import "98.css";
+// import "../globals.css";
 import styles from "./Login.module.css";
 // import { AuthContext } from "../layout";
 import * as userServices from '../api/services/user'
 import { useRouter } from 'next/navigation'
+import Home from '../home/page'
 
 export default function Login() {
   const windowRef = useRef(null);
   // const { auth, setAuth } = useContext(AuthContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [users, setUsers] = useState([])
 
   const router = useRouter();
+
+  useEffect(async () => {
+    async function getAllUsers() {
+      const response = await userServices.getUsers()
+      return response
+    }
+    const userList = await getAllUsers()
+    const userArray = userList.map(item => item.username)
+    console.log(userArray);
+    setUsers(userArray);
+  }, [])
 
   useEffect(() => {
     const windowElement = windowRef.current;
@@ -73,18 +87,25 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await userServices.signin(username, password);
-    if (response.username) {
-      // setAuth(true)
-      router.push('/home')
+    if (users.includes(username)) {
+      const response = await userServices.signin(username, password);
+      console.log('The response is:')
+      console.log(response);
     }
-    console.log(response);
+    else {
+      console.log('No user by that name.')
+    }
+    // if (response.username) {
+    //   // setAuth(true)
+    //   // router.push('/home')
+    // }
+
   }
 
   return (
     <>
-      <div style={{ height: "100px" }}></div>
-
+      {/* <div style={{ height: "100px" }}></div> */}
+      {/* {(auth === true) ? */}
       <div className="flex-container">
         <div className={styles.window} ref={windowRef}>
           <div className="title-bar">
@@ -159,7 +180,6 @@ export default function Login() {
 
                 <button
                   className={styles.signOnBtn}
-                // onClick={handleSubmit()}
                 >
                   <div style={{ minWidth: "38px" }}>
                     <img
@@ -173,6 +193,9 @@ export default function Login() {
           </div>
         </div>
       </div>
+      {/* :
+        <Home />
+      } */}
     </>
   );
 }
