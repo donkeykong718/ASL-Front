@@ -10,28 +10,43 @@ export default function Homepage() {
 
 
   const [options, setOptions] = useState([])
-  const [categoryChoice, setCategoryChoice] = useState("")
+  const [categoryChoice, setCategoryChoice] = useState([])
   const [categoryOption, setCategoryOption] = useState("")
+  const [finalCategoryList, setfinalCategoryList] = useState([])
+  const [conversation, setConversation] = useState([])
 
   const onInputChange = (e) => {
     const value = e.target.value
     setOptions(
-      defaultOptions.filter(option =>
+      finalCategoryList.filter(option =>
         option.toLowerCase().includes(value.toLowerCase()))
     )
   }
 
   useEffect(() => {
     const getAllRooms = async () => {
-      const roomList = await chatFunctions.getRooms();
-      roomList.forEach(room => {
-        const { name } = room
-        console.log(name)
-      })
-    };
+      try {
+        const roomList = await chatFunctions.getRooms();
+        const newRoomList = [...roomList]
+        setConversation(newRoomList)
+        let categoryList = [];
+        roomList.forEach(room => {
+          const { category } = room
+          categoryList.push(category)
+        })
+        const uniqueCategories = [... new Set(categoryList)]
+        setfinalCategoryList(uniqueCategories)
+      } catch (error) {
+        console.error(error);
+      }
+    }
     getAllRooms();
   }, []);
 
+  useEffect(() => {
+    // console.log(finalCategoryList);
+    // console.log(conversation);
+  }, [finalCategoryList, conversation])
 
 
   // Simulated db
@@ -48,14 +63,20 @@ export default function Homepage() {
         onInputChange={onInputChange}
         categoryChoice={categoryChoice}
         setCategoryChoice={setCategoryChoice}
+        finalCategoryList={finalCategoryList}
       />
       <button className="home-search-button">Search</button>
       <CategoryScroll
         categoryOption={categoryOption}
         setCategoryOption={setCategoryOption}
         categoryChoice={categoryChoice}
+        finalCategoryList={finalCategoryList}
       />
-      <RoomList categoryOption={categoryOption} />
+      <RoomList
+        categoryOption={categoryOption}
+        finalCategoryList={finalCategoryList}
+        conversation={conversation}
+      />
     </div>
   )
 }
