@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
+import styles from './Categories.module.css';
 
 export const RoomList = (props) => {
   const { categoryOption, finalCategoryList, conversation } = props;
@@ -14,7 +15,8 @@ export const RoomList = (props) => {
         return (<button
           type="button"
           key={option.id}
-          className={option.category}
+          className={styles.roomButtons}
+          onClick={() => { location.href = `/chat/${option.name}` }}
         >{option.name}
         </button>);
       });
@@ -25,7 +27,8 @@ export const RoomList = (props) => {
           return (<button
             type="button"
             key={option.id}
-            className={option.category}
+            className={styles.roomButtons}
+            onClick={() => { location.href = `/chat/${option.name}` }}
           >{option.name}
           </button>);
         });
@@ -36,6 +39,20 @@ export const RoomList = (props) => {
   return (
     <div className="room-list-display">
       <h3>Choose a room</h3>
+      <div class="sunken-panel" style={{ height: '120px', width: '240px' }}>
+        <table class="interactive">
+          <thead>
+            <tr>
+              <th className={styles.roomListHeader}>
+                {categoryOption ? `Rooms in ${categoryOption}` : "Pick a room:"}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
       {setButtons()}
     </div>
   )

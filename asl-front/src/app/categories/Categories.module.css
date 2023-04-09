@@ -15,4 +15,15 @@
   width: 250px;
 }
 
-/* .searchBarListItem {} */
+/* .roomButtons {
+  display: flex;
+  flex-direction: column;
+} */
+
+.roomListHeader {
+  width: 240px;
+}
+
+.categoryHeader {
+  width: 240px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import styles from './Categories.module.css';
 
 export const CategoryScroll = (props) => {
   const { categoryChoice, categoryOption, finalCategoryList, setCategoryOption } = props;
@@ -25,6 +26,20 @@ export const CategoryScroll = (props) => {
     <div className="category-scroll-display">
       <h3>Choose a category</h3>
       <div className="category-scroll-options">
+        <div class="sunken-panel" style={{ height: '120px', width: '240px' }}>
+          <table class="interactive">
+            <thead>
+              <tr>
+                <th className={styles.categoryHeader}>
+                  Category
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
         {categories.map(choice => {
           return (
             <button
@@ -35,7 +50,6 @@ export const CategoryScroll = (props) => {
             >
               {choice}
             </button>
-            // <option value={choice} className="category-scroll-option" onClick={onClick}>{choice}</option>
           )
         })}
       </div>
