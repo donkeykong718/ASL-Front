@@ -14,33 +14,37 @@ import Window from './components/Window'
 // }
 
 export const AuthContext = React.createContext();
+export const UserContext = React.createContext();
 
 export default function RootLayout({ children }) {
 
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState({});
   const router = useRouter();
 
   useEffect(() => {
     const stringUser = localStorage.getItem('user')
-    const jsonUser = JSON.parse(stringUser)
-    if (jsonUser) {
-      const currentUser = jsonUser.username;
+    const currentUser = JSON.parse(stringUser)
+    if (currentUser) {
       console.log(currentUser)
       setUser(currentUser);
       setAuth(true);
-      // router.push('/home')
+      router.push('/home')
     }
-    // else { router.push('/login') }
+    else { router.push('/login') }
   }, [])
 
 
   return (
     <html lang="en">
       <body>
-        <AuthContext.Provider value={{ auth, setAuth }}>
-          <Window content={children} />
-        </AuthContext.Provider>
+        <main className="main">
+          <AuthContext.Provider value={{ auth, setAuth }}>
+            <UserContext.Provider value={{ user, setUser }}>
+              <Window children={children} mainWindow='true' title={`Welcome to A/S/L! You are logged in as ${user.username}`} ></Window>
+            </UserContext.Provider>
+          </AuthContext.Provider>
+        </main>
         <img id='dummy-footer' src='/assets/images/dummy_footer.png' />
       </body>
     </html>
