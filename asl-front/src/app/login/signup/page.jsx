@@ -8,13 +8,12 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 // import * as userServices from '../api/services/user'
 // import { useRouter } from 'next/navigation'
 // import Home from '../home/page'
-import Window from '../components/Window'
-import Signin from './Signin'
+import Window from '../../components/Window'
 import Signup from './Signup'
 
 export const LoginContext = React.createContext();
 
-export default function Login({ children }) {
+export default function Signup({ children }) {
 
 
   // const { auth, setAuth } = useContext(AuthContext)
@@ -60,9 +59,7 @@ export default function Login({ children }) {
 
     <div className="flex-container">
       <LoginContext.Provider value={{ login, setLogin }}>
-        {login ?
-          <Window children={<Signin />} title="Sign On" /> :
-          <Window children={<Signup />} title="Sign Up" />}
+        <Window children={<Signup />} title="Sign On" />
       </LoginContext.Provider>
       {/* <div className={styles.window} ref={windowRef}>
           <div className="title-bar">
