@@ -11,10 +11,22 @@ export const getUser = async (id) => {
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await api.get("/users");
+    return response.data;
+  }
+  catch (error) {
+    throw error
+  }
+}
+
+
 export const signup = async (username, password) => {
   try {
-    const response = await api.post("/token/", { username, password });
-    localStorage.setItem(LOCALSTORAGE_KEY, response.data);
+    const response = await api.post('/users/', { username, password });
+    localStorage.clear();
+    localStorage.setItem('user', JSON.stringify(response.data));
 
     return response.data;
   }
@@ -24,11 +36,12 @@ export const signup = async (username, password) => {
   }
 };
 
+
 export const signin = async (username, password) => {
   try {
     const response = await api.post("/token/", { username, password });
     localStorage.clear();
-    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem('user', JSON.stringify(response.data));
     console.log(localStorage.getItem('user'))
     // console.log('Sign in returns:')
     // console.log(response);

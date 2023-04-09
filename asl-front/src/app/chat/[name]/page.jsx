@@ -1,19 +1,19 @@
 'use client';
 
-import '../../../app/globals.css'
 import styles from '../Chatroom.module.css'
-import '98.css'
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import ListBuddy from './ListBuddy';
 import ChatLine from './Chatline';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import * as chatFunctions from '../../api/services/chatrooms'
 import * as userFunctions from '../../api/services/user'
 import useSound from 'use-sound';
+import { RoomContext } from '../layout'
+import { UserContext } from '@/app/layout';
 
 const modules = {
   toolbar: [
@@ -37,19 +37,30 @@ const formats = [
   'underline'
 ]
 
-const currentUser = 'admin'
-const currentPassword = 'password'
+// const currentUser = 'admin'
+// const currentPassword = 'password'
 
 export default function Chatroom() {
 
-  const [value, setValue] = useState({});
-  const [user, setUser] = useState({});
   const [room, setRoom] = useState({});
+  // const { user, setUser } = useContext(UserContext);
+  const [user, setUser] = useState({})
+
+  const [value, setValue] = useState({});
   const [messageHistory, setMessageHistory] = useState([])
   const [hasMoreMessages, setHasMoreMessages] = useState(false)
   const [pcpts, setParticipants] = useState([])
   const [conversation, setConversation] = useState(null);
   const [page, setPage] = useState(2)
+
+  // const router = useRouter();
+
+  // const userString = localStorage.getItem("user")
+  // const userJSON = JSON.parse(userString)
+  // console.log('The user is:')
+  // setUser(userJSON);
+  // console.log(user)
+  // const { name } = useParams();
 
 
   const { name } = useParams();
@@ -60,19 +71,48 @@ export default function Chatroom() {
   const [playOpen] = useSound('assets/sounds/dooropen.wav')
   const [playClose] = useSound('assets/sounds/doorslam.wav')
 
+  useEffect(() => {
+    async function loadPage() {
 
-  useEffect(async () => {
-    const roomInfo = await chatFunctions.getaRoom(name)
-    setRoom(roomInfo);
-    console.log(roomInfo)
-    const user = await userFunctions.signin(currentUser, currentPassword)
-    console.log(user)
-    setUser(user);
-    fetchMessages();
+      const roomInfo = await chatFunctions.getaRoom(name)
+      setRoom(roomInfo)
+      console.log(roomInfo)
+
+      const stringUser = localStorage.getItem('user')
+      const currentUser = JSON.parse(stringUser)
+      // if (currentUser) {
+      // const currentUser = jsonUser.username;
+      console.log('The current user is:')
+      console.log(currentUser)
+      setUser(currentUser);
+      // }
+      fetchMessages();
+      // console.log('The user is')
+      // console.log(user)
+      // console.log('The name of the room is')
+      // console.log(roomName)
+    }
+    loadPage();
+    // else { router.push('/login') }
   }, [])
 
+  // async function checkPage() {
+  //   const result = await chatFunctions.getaRoom(name)
+  //   if (result.status === 200) {
+  //     const roomInfo = await result.json();
+  //     setRoom(roomInfo)
+  //   }
+  // else {
+  //   router.push('/404')
+  // }
+  // }
+
+  // useEffect(() => {
+  //   fetchMessages();
+  // }, [])
+
   const { readyState, sendJsonMessage } = useWebSocket(
-    user ? `wss://asl-back.herokuapp.com/chats/${roomName}/` : null,
+    user ? `wss://asl-back.herokuapp.com/chats/${roomName}` : null,
     {
       queryParams: {
         token: user ? user.token : "",
@@ -161,33 +201,18 @@ export default function Chatroom() {
   useEffect(() => { playReceive() }, [messageHistory])
 
   return (
-    <div className="window">
-      <div className="title-bar">
-        <div className="title-bar-text">
-          <img></img>
-          ASL - [ {name} Chat] </div>
-        <div className="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
+    <div className={styles.chatContainer}>
+      <div className={styles.chatCol}>
+        <div className={styles.chatWindow}>
+          {messageHistory.map((message, index) => (<ChatLine message={message} key={index} />))}
         </div>
+        <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
+        <button className={styles.submitButton} onClick={() => { handleSubmit }}>Send!</button>
       </div>
-      <div className="window-body">
-        <div className={styles.chatContainer}>
-          <div className={styles.chatCol}>
-            <div className={styles.chatWindow}>
-              {messageHistory.map((message, index) => (<ChatLine message={message} key={index} />))}
-            </div>
-            <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
-            <button className={styles.submitButton} onClick={handleSubmit}>Send!</button>
-
-          </div>
-          <div className={styles.buddyCol}>
-            <p className={styles.userList}>{pcpts.length} people here</p>
-            <div className={styles.buddyList}>
-              {pcpts.map((user, index) => (<ListBuddy user={user} key={index} />))}
-            </div>
-          </div>
+      <div className={styles.buddyCol}>
+        <p className={styles.userList}>{pcpts.length} people here</p>
+        <div className={styles.buddyList}>
+          {pcpts.map((user, index) => (<ListBuddy user={user} key={index} />))}
         </div>
       </div>
     </div>

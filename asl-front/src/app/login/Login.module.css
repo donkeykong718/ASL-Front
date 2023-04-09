@@ -2,17 +2,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  width: fit-content;
+  height: fit-content;
 }
 
-.window {
+.windowBody {
   /* height: 600px;
   width: 300px; */
   background-color: silver;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   padding: 3px;
   z-index: 1;
   border: 1px solid #ccc;
@@ -42,8 +43,6 @@
 
 }
 
-
-
 .titleBarIcon {
   margin-right: 13px;
   background-color: #005BAB;
@@ -59,7 +58,7 @@
   color: white;
   letter-spacing: 0;
   margin-right: 170px;
-  
+
 }
 
 /* .titleBarControls {
@@ -133,7 +132,17 @@
   justify-content: center;
   background-color: silver;
   margin: var(--element-spacing);
+}
 
+.logo,
+.logo2 {
+  position: relative;
+  height: 30vh;
+  margin-top: 1.5em;
+}
+
+.logo2 {
+  transform: scaleX(-1);
 }
 
 .aolBox {
@@ -202,6 +211,17 @@
   justify-content: center;
   align-items: center;
   height: 35px;
-/* width: 25px;
+  /* width: 25px;
 min-width: 25px; */
+}
+
+.signupBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+}
+
+.signOnBtn:disabled {
+  filter: grayscale();
 }

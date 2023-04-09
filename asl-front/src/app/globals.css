@@ -1,12 +1,16 @@
-
-
+*,
 html {
-  position: relative;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Arial';
+  /* height: 100vh;
+  width: 100vw;
+  font-family: 'Arial'; */
+}
+
+html {
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 body {
@@ -14,14 +18,45 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 
+.main {
+  /* position: relative; */
+  display: flex;
+}
 
+.window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 90vw;
+  max-height: 100vh;
+  align-content: center;
+  min-height: 50vw;
 
+  /* min-height: 90%; */
+}
 
+.window-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+}
 
+#dummy-toolbar {
+  position: relative;
+  max-width: 100vw;
+}
 
-
-
-
-
+#dummy-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  width: 100vw;
+}
