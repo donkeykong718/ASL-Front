@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSound } from "use-sound";
+import useSound from "use-sound";
 import styles from "./Dial-up.module.css";
 
 export default function DialUp() {
+  const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
+
   const [imageIndex, setImageIndex] = useState(0);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -49,30 +51,36 @@ export default function DialUp() {
 
   return (
     <div className="flex-container">
-      <div className="title-bar">
-        <div className="title-bar-text"></div>
-        <div className="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
+      <div className={styles.background} />
+
       <div
         className={`window-body ${isAnimationPlaying ? styles.animation : ""}`}
         onAnimationEnd={onAnimationEnd}
         style={{
           backgroundImage: `url(${images[imageIndex]})`,
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          minHeight: "650px",
+          backgroundSize: "auto",
+          width: "800px", 
+          height: "600px", 
+          margin: "auto", 
+          display: "flex",
+          justifyContent: "center", 
+          alignItems: "center",
         }}
       >
         <div
           className={styles.overlay}
           style={{ backgroundImage: `url(${images[imageIndex]})` }}
         />
-        <button onClick={handleClick}>Start Animation</button>
       </div>
+      <button
+        onClick={() => {
+          playModem(); 
+          handleClick(); 
+        }}
+      >
+        Start Animation
+      </button>
     </div>
   );
 }
