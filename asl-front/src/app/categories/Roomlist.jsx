@@ -17,7 +17,7 @@ export const RoomList = (props) => {
           type="button"
           key={option.id}
           className={styles.roomButtons}
-          onClick={() => { location.href = `/chat/${option.name}` }}
+          onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
         >{option.name}
         </button>);
       });
@@ -29,7 +29,7 @@ export const RoomList = (props) => {
             type="button"
             key={option.id}
             className={styles.roomButtons}
-            onClick={() => { location.href = `/chat/${option.name}` }}
+            onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
           >{option.name}
           </button>);
         });

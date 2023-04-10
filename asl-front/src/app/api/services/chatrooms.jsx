@@ -22,7 +22,7 @@ export const getaRoom = async (name) => {
 
 export const createRoom = async (request) => {
   try {
-    const response = await api.post("/conversations/", request.body);
+    const response = await api.post("/conversation/", request.body);
 
     return response.data;
   }
@@ -31,3 +31,4 @@ export const createRoom = async (request) => {
     throw error;
   }
 };
+
