@@ -1,20 +1,30 @@
 "use client";
 
-import { AuthContext } from "../layout";
+import { AuthContext, UserContext } from "../ContextProvider";
 import { useContext, useEffect, useRef, useState } from "react";
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useSound } from "use-sound";
+// import coolMan from '../../../public/assets/images / cool - man.png'
+import * as userFunctions from '../api/services/user'
+
 
 export default function Window({ children, mainWindow, title }) {
 
-  // const { auth, setAuth } = useContext(AuthContext);
-  // const [user, setUser] = useState({})
+  const [playGoodbye] = useSound("/assets/sounds/Goodbye.wav");
+  const { auth, setAuth } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext)
   const windowRef = useRef(null);
+  const router = useRouter();
+
+  // const window = document.querySelector('.window')
 
 
   //   if (typeof window !== 'undefined'){
   //   const stringUser = localStorage.getItem('user')
   //   const jsonUser = JSON.parse(stringUser)
   //   if (jsonUser) {
-  //     const currentUser = jsonUser.username;
+  //     const currentUser = jsonUser.usernaame;
   //     console.log(currentUser)
   //     setUser(currentUser);
   //     // setAuth(true);
@@ -87,7 +97,10 @@ export default function Window({ children, mainWindow, title }) {
     <div className="window" ref={windowRef}>
       <div className="title-bar">
         <div className="title-bar-text">
-          <img style={{ height: '1em', marginRight: '5px' }} src='assets/images/cool-man.png' />
+          <Image
+            width={20}
+            height={20}
+            style={{ marginRight: '5px' }} src='/assets/images/cool-man.png' alt='logo' />
           {title}{/* Welcome to A/S/L. You are logged in as: {user} */}
         </div>
         <div className="title-bar-controls">
@@ -104,16 +117,30 @@ export default function Window({ children, mainWindow, title }) {
             <li ><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>F</span>ile</li>
             <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>E</span>dit</li>
             <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>W</span>indow</li>
-            <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>S</span>ign Off</li>
+
+            <li className="signoff" onClick={() => {
+              playGoodbye()
+              userFunctions.logOff()
+              setUser({})
+              setAuth(false)
+              console.log('Sign off has been clicked')
+              console.log(localStorage.getItem('user'));
+              router.push('/login')
+            }}>
+
+              <span style={{ textDecoration: 'underline', marginLeft: '10px' }}>S</span>ign Off</li>
             <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>H</span>elp</li>
           </ul>
           <div className="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
+            <button onClick={() => { windowRef.parentNode.removeChild(windowRef) }} aria-label="Close"></button>
           </div>
         </div>
-        <img id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' /> </> : <></>}
+        <Image id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' alt='toolbar'
+          width={700}
+          height={60}
+        /> </> : <></>}
 
       <div className='window-body'>
         {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
