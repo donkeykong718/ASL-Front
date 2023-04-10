@@ -99,6 +99,7 @@ export default function Chatroom() {
             setHasMoreMessages(data.has_more);
             break;
           case "user_join":
+            playOpen();
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
                 const setGreeting = {
@@ -115,6 +116,7 @@ export default function Chatroom() {
             });
             break;
           case "user_leave":
+            playClose();
             setParticipants((pcpts) => {
               const setGreeting = { from_user: 'Host', content: `${user.username} has left the chat.` }
               setMessageHistory((prev) => [setGreeting, ...prev])
@@ -198,7 +200,7 @@ export default function Chatroom() {
 
   const handleSubmit = () => {
     let message = value;
-    console.log('You submitted')
+    playSend();
     sendJsonMessage({
       type: "chat_message",
       message,
@@ -207,9 +209,9 @@ export default function Chatroom() {
     // playSend();
   }
 
-  // useEffect(() => { playReceive() }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // , [messageHistory])
+  useEffect(() => { playReceive() }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    , [messageHistory])
 
   return (
     <div className={styles.chatContainer}>

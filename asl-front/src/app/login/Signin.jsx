@@ -42,7 +42,7 @@ export default function Signin() {
       console.log(response);
 
       //This doesn't work for some reason
-      if (response.status === 200) {
+      if (response) {
         setUser(response)
         setAuth(true);
         router.refresh();

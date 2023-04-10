@@ -20,9 +20,8 @@ export default function ContextProvider({ children }) {
   useEffect(() => {
 
     const stringUser = localStorage.getItem('user')
-    const currentUser = JSON.parse(stringUser)
-    if (currentUser) {
-      console.log(currentUser)
+    if (stringUser !== undefined) {
+      const currentUser = JSON.parse(stringUser)
       setUser(currentUser);
       setAuth(true);
       // router.push('/home')
