@@ -7,6 +7,7 @@ import * as userServices from '../api/services/user'
 import { LoginContext } from "./login-provider";
 import useSound from "use-sound";
 import ButtonBox from './Buttonbox'
+import { useRouter } from 'next/navigation'
 
 
 export default function SignUp() {
@@ -19,14 +20,17 @@ export default function SignUp() {
   const [check, setCheck] = useState('')
   const [users, setUsers] = useState([])
   const [unique, setUnique] = useState(true)
+
+
+  const router = useRouter();
   const [playError] = useSound('/assets/sounds/quickerror.mp3')
 
   useEffect(() => {
     async function getAllUsers() {
       const userList = await userServices.getUsers()
-      // const userArray = userList.map(item => item.username)
+      const userArray = userList.map(item => item.username)
       console.log(userList);
-      // setUsers(userArray);
+      setUsers(userArray);
     }
     getAllUsers()
 
@@ -43,10 +47,11 @@ export default function SignUp() {
       const response = await userServices.signup(username, password);
       console.log('The response is:')
       console.log(response)
-      if (response.status === 200) {
+      if (response) {
         setUser(response)
         setAuth(true)
         setLogin(true)
+        router.refresh()
       }
       else {
         playError();
@@ -57,11 +62,16 @@ export default function SignUp() {
     }
   }
 
+  const clearUnique = e => {
+    setUsername(e.target.value)
+    setUnique(true)
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.loginFieldRowStacked}>
         <label htmlFor="text22">Screen Name</label>
-        <input d="text22" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+        <input d="text22" type="text" value={username} onChange={clearUnique} />
 
       </div>
 
