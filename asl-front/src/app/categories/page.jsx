@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { SearchbarDropdown } from './SearchbarDropdown'
 import { CategoryScroll } from './Categoryscroll'
 import { RoomList } from './Roomlist'
+import CreateRoom from './CreateRoom'
 import * as chatFunctions from '../api/services/chatrooms'
 
 export default function Homepage() {
@@ -49,12 +50,6 @@ export default function Homepage() {
   }, [finalCategoryList, conversation])
 
 
-  // Simulated db
-  const defaultOptions =
-    [
-      'Targaryen', 'Lannister', 'Stark', 'Baratheon', 'Tyrell',
-    ];
-
   return (
     <div className="home-parent">
       <h3 className="home-search">Search Bar Dropdown</h3>
@@ -76,6 +71,9 @@ export default function Homepage() {
         categoryOption={categoryOption}
         finalCategoryList={finalCategoryList}
         conversation={conversation}
+      />
+      <CreateRoom
+        finalCategoryList={finalCategoryList}
       />
     </div>
   )

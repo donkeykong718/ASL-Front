@@ -12,13 +12,6 @@ export const CategoryScroll = (props) => {
     // console.log(categoryOption);
   }, [categoryOption])
 
-  // const defaultOptions =
-  //   [
-  //     'Targaryen', 'Lannister', 'Stark', 'Baratheon', 'Tyrell',
-  //   ];
-
-
-
 
   const categories = categoryChoice.length > 0 ? categoryChoice : finalCategoryList;
 

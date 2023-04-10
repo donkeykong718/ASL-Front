@@ -27,3 +27,16 @@
 .categoryHeader {
   width: 240px;
 }
+
+
+.createRoomDisplay {
+  position: absolute;
+  top: 250px;
+  right: 50px;
+}
+
+.createRoomForm {
+  position: absolute;
+  top: 250px;
+  right: 50px;
+}
