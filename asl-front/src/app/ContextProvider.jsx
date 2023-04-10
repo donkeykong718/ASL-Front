@@ -17,6 +17,8 @@ export default function ContextProvider({ children }) {
 
   const router = useRouter();
 
+  const defaultUser = { username: 'none' }
+
   useEffect(() => {
 
     const stringUser = localStorage.getItem('user')
@@ -26,7 +28,10 @@ export default function ContextProvider({ children }) {
       setAuth(true);
       // router.push('/home')
     }
-    else { router.push('/login') }
+    else {
+      setUser(defaultUser)
+      router.push('/login')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
