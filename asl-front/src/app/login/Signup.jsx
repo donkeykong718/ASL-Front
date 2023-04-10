@@ -1,14 +1,12 @@
 "use client";
 
-import styles from "../Login.module.css";
-import React, { useRef, useState, useEffect, useContext } from "react";
-import { AuthContext, UserContext } from "../../ContextProvider";
-import * as userServices from '../../api/services/user'
-import { LoginContext } from "../login-provider";
-import Image from 'next/image'
+import styles from "./Login.module.css";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext, UserContext } from "../ContextProvider";
+import * as userServices from '../api/services/user'
+import { LoginContext } from "./login-provider";
 import useSound from "use-sound";
-import ButtonBox from '../Buttonbox'
-import LogoBox from '../Logo'
+import ButtonBox from './Buttonbox'
 
 
 export default function SignUp() {

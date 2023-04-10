@@ -1,3 +1,5 @@
+"use client";
+
 import LoginProivder from "./login-provider"
 
 export default function LoginLayout({ children }) {

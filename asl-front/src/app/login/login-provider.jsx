@@ -9,16 +9,16 @@ import styles from "./Login.module.css"
 import { useRouter } from 'next/navigation'
 // import Home from '../home/page'
 import Window from '../components/Window'
-// import Signin from './Signin/page'
-// import Signup from './Signup/page'
+import Signin from './Signin'
+import Signup from './Signup'
 import Dialup from './Dialup'
 import { AuthContext } from "../ContextProvider";
 import useSound from "use-sound";
 import LogoBox from './Logo'
-import ButtonBox from "./Buttonbox";
+// import ButtonBox from "./Buttonbox";
 export const LoginContext = React.createContext();
 
-export default function LoginProivder({ children }) {
+export default function LoginProivder() {
 
   const [playModem] = useSound('/assets/sounds/dial-up-modem.wav')
 
@@ -35,12 +35,12 @@ export default function LoginProivder({ children }) {
     playModem()
   }, [auth])
 
-  if (login) {
-    router.push('/login/signin')
-  }
-  else {
-    router.push('login/signup')
-  }
+  // if (login) {
+  //   router.push('/login/signin')
+  // }
+  // else {
+  //   router.push('/login/signup')
+  // }
   // useEffect(async () => {
   //   async function getAllUsers() {
   //     const response = await userServices.getUsers()
@@ -76,8 +76,11 @@ export default function LoginProivder({ children }) {
     <div>
       {auth ? <Dialup /> :
         <LoginContext.Provider value={{ login, setLogin }}>
-          < Window title="A/S/L Log On">
-            <LogoBox />{children}</Window>
+          {login ?
+            < Window title="A/S/L Sign On">
+              <LogoBox /><Signin /></Window> :
+            < Window title="A/S/L Sign Up">
+              <LogoBox /><Signup /></Window>}
         </LoginContext.Provider>}
     </div>
   );
