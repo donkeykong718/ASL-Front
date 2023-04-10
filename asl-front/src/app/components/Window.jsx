@@ -94,6 +94,7 @@ export default function Window({ children, mainWindow, title }) {
   }, []);
 
   return (
+    <div className="main">
     <div className="window" ref={windowRef}>
       <div className="title-bar">
         <div className="title-bar-text">
@@ -112,7 +113,6 @@ export default function Window({ children, mainWindow, title }) {
 
       {mainWindow ? <>
         <div className="title-bar" style={{ background: '#c0bfbe', height: "1.25em" }}>
-          {/* <img style={{ height: '1em', marginRight: '5px', display: 'inline' }} src='assets/images/cool-man.png' /> */}
           <ul className="title-bar-text" style={{ color: '#605e60', listStyle: 'none', display: 'flex' }}>
             <li ><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>F</span>ile</li>
             <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>E</span>dit</li>
@@ -147,6 +147,7 @@ export default function Window({ children, mainWindow, title }) {
         {children}
         {/* </AuthContext.Provider> */}
       </div>
+    </div>
     </div>
   )
 }

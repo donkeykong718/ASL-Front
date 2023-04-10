@@ -24,19 +24,19 @@ body {
 }
 
 .main {
-  /* position: relative; */
-  display: flex;
+padding: 20px 10px 20px 10px; 
+margin: 20px;
 }
 
 .window {
-  position: relative;
+  /* position: fixed; */
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 20px,40px,20px,40px;
   max-width: 90vw;
   max-height: 100vh;
   align-content: center;
-  min-height: 50vw;
+  min-height: 25vh;
 
   /* min-height: 90%; */
 }
@@ -51,6 +51,7 @@ body {
 
 #dummy-toolbar {
   position: relative;
+  width: 100%;
   max-width: 100vw;
 }
 

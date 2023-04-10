@@ -11,9 +11,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <main className="main">
+        {/* <main className="main"> */}
           <ContextProvider>{children}</ContextProvider>
-        </main>
+        {/* </main> */}
         <Image id='dummy-footer' src='/assets/images/dummy_footer.png' alt="footer" width={1000}
           height={30} />
       </body>
