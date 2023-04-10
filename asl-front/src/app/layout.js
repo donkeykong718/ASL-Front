@@ -1,10 +1,12 @@
+// import React, { useEffect, useContext } from 'react'
 import './globals.css'
 import '98.css'
 import Image from 'next/image'
-import ContextProvider from './context-provider'
+import ContextProvider from './ContextProvider'
 
 export default function RootLayout({ children }) {
 
+  // const { user, setUser } = useContext(UserContext);
 
   return (
     <html lang="en">

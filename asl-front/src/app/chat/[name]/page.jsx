@@ -12,8 +12,8 @@ import { useParams, useRouter } from 'next/navigation';
 import * as chatFunctions from '../../api/services/chatrooms'
 import * as userFunctions from '../../api/services/user'
 import useSound from 'use-sound';
-import { RoomContext } from '../layout'
-import { AuthContext, UserContext } from '../../context-provider';
+import { RoomContext, SocketContext } from '../layout'
+import { AuthContext, UserContext } from '../../ContextProvider';
 
 const modules = {
   toolbar: [
@@ -37,14 +37,15 @@ const formats = [
   'underline'
 ]
 
-const currentUser = 'admin'
-const currentPassword = 'password'
+// const currentUser = 'admin'
+// const currentPassword = 'password'
 
 export default function Chatroom() {
 
   const [room, setRoom] = useState({});
-  // const { user, setUser } = useContext(UserContext);
-  const [user, setUser] = useState({})
+  const { user, setUser } = useContext(UserContext);
+  const { socketUrl, setSocketUrl } = useContext(SocketContext)
+  // const [user, setUser] = useState({})
 
   const [value, setValue] = useState({});
   const [messageHistory, setMessageHistory] = useState([])
@@ -68,16 +69,15 @@ export default function Chatroom() {
 
   const [playSend] = useSound('/assets/sounds/imsend.wav')
   const [playReceive] = useSound('/assets/sounds/imrcv.wav')
-  const [playOpen] = useSound('assets/sounds/dooropen.wav')
-  const [playClose] = useSound('assets/sounds/doorslam.wav')
+  const [playOpen] = useSound('/assets/sounds/dooropen.wav')
+  const [playClose] = useSound('/assets/sounds/doorslam.wav')
 
-  const userToken = user.token
   const { readyState, sendJsonMessage } = useWebSocket(
-    user ? `ws://asl-back.herokuapp.com/chats/${roomName}` : null,
+    user ? socketUrl : null,
     {
-      queryParams: {
-        token: userToken || ""
-      },
+      // queryParams: {
+      //   token: user ? user.token : ""
+      // },
       onOpen: () => {
         console.log("Connected!");
         console.log(user)
@@ -90,7 +90,6 @@ export default function Chatroom() {
         console.log(user)
         console.log(user.token)
       },
-      // onMessage handler
       onMessage: (e) => {
         const data = JSON.parse(e.data);
         switch (data.type) {
@@ -106,7 +105,6 @@ export default function Chatroom() {
             setHasMoreMessages(data.has_more);
             break;
           case "user_join":
-            // playOpen();
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
                 return [...pcpts, data.user];
@@ -115,7 +113,6 @@ export default function Chatroom() {
             });
             break;
           case "user_leave":
-            // playClose();
             setParticipants((pcpts) => {
               const newPcpts = pcpts.filter((x) => x !== data.user);
               return newPcpts;
@@ -135,29 +132,20 @@ export default function Chatroom() {
     }
   );
 
+
   useEffect(() => {
-    async function loadPage() {
+    // async function loadPage() {
 
-      const roomInfo = await chatFunctions.getaRoom(name)
-      setRoom(roomInfo)
-      console.log(roomInfo)
+    //   const roomInfo = await chatFunctions.getaRoom(name)
+    //   setRoom(roomInfo)
+    //   console.log(roomInfo)
 
-      const user = await userFunctions.signin(username, password)
-      setUser(user);
+    //   const stringUser = localStorage.getItem('user')
+    //   const currentUser = JSON.parse(stringUser)
+    //   console.log('The current user is:')
+    //   console.log(currentUser)
 
-      // const stringUser = localStorage.getItem('user')
-      // const currentUser = JSON.parse(stringUser)
-      // if (currentUser) {
-      // const currentUser = jsonUser.username;
-      // console.log('The current user is:')
-      // console.log(currentUser)
-      // setUser(currentUser);
-      // }
-      // console.log('The user is')
-      // console.log(user)
-      // console.log('The name of the room is')
-      // console.log(roomName)
-    }
+    // }
 
     async function fetchMessages() {
       const apiRes = await fetch(
@@ -179,7 +167,7 @@ export default function Chatroom() {
         console.log(messageHistory)
       }
     }
-    loadPage();
+    // loadPage();
     fetchMessages();
     // else { router.push('/login') }
   }
@@ -203,6 +191,7 @@ export default function Chatroom() {
 
   const handleSubmit = () => {
     let message = value;
+    console.log('You submitted')
     sendJsonMessage({
       type: "chat_message",
       message,
@@ -222,7 +211,7 @@ export default function Chatroom() {
           {messageHistory.map((message, index) => (<ChatLine message={message} key={index} />))}
         </div>
         <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
-        <button className={styles.submitButton} onClick={() => { handleSubmit }}>Send!</button>
+        <button className={styles.submitButton} onClick={() => { handleSubmit() }}>Send!</button>
       </div>
       <div className={styles.buddyCol}>
         <p className={styles.userList}>{pcpts.length} people here</p>

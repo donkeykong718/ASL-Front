@@ -2,7 +2,7 @@
 
 import styles from "../Login.module.css";
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { AuthContext, UserContext } from "../../context-provider";
+import { AuthContext, UserContext } from "../../ContextProvider";
 import * as userFunctions from '../../api/services/user'
 import { LoginContext } from "../login-provider";
 import useSound from "use-sound";
@@ -20,6 +20,7 @@ export default function Signin() {
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
   const [error, setError] = useState(false)
+  const [error2, setError2] = useState(false)
 
   const router = useRouter();
 
@@ -41,15 +42,14 @@ export default function Signin() {
       const response = await userFunctions.signin(username, password);
       console.log('The response is:')
       console.log(response);
-      if (response.status === 200) {
+      if (response) {
         setUser(response)
         setAuth(true);
         router.refresh()
       }
       else {
         playError();
-        return (<p style={{ color: "red", fontStyle: "italic", fontWeight: 'bold' }}>Error: incorrect password.</p>
-        )
+        setError2(true)
       }
     }
     else {
@@ -59,14 +59,15 @@ export default function Signin() {
     }
   }
 
-
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.loginFieldRowStacked}>
         <label htmlFor="text22">Screen Name</label>
         <input id="text22" type="text" value={username} onChange={e => setUsername(e.target.value)} />
       </div>
+
       {error ? <><p style={{ color: "red", fontStyle: "italic", fontWeight: 'bold' }}>Username not found.</p><p>Click on &apos;Help&apos; to create an account.</p></> : <></>}
+      {error2 ? <><p style={{ color: "red", fontStyle: "italic", fontWeight: 'bold' }}>Incorrect password.</p></> : <></>}
 
       <div className={styles.loginFieldRowStacked}>
         <label htmlFor="text23">Password</label>
@@ -78,7 +79,6 @@ export default function Signin() {
         <label htmlFor="example1">Save Password</label>
       </div>
       <ButtonBox />
-    </form>
+    </form >
   )
-
 }

@@ -25,7 +25,7 @@ export default function ContextProvider({ children }) {
       console.log(currentUser)
       setUser(currentUser);
       setAuth(true);
-      router.push('/home')
+      // router.push('/home')
     }
     else { router.push('/login') }
     // eslint-disable-next-line react-hooks/exhaustive-deps

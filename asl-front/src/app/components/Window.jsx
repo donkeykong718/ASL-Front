@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext, UserContext } from "../context-provider";
+import { AuthContext, UserContext } from "../ContextProvider";
 import { useContext, useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -9,7 +9,7 @@ import { useSound } from "use-sound";
 import * as userFunctions from '../api/services/user'
 
 
-export default function Window({ children, mainWindow, title, onClose }) {
+export default function Window({ children, mainWindow, title }) {
 
   const [playGoodbye] = useSound("/assets/sounds/Goodbye.wav");
   const { auth, setAuth } = useContext(AuthContext);

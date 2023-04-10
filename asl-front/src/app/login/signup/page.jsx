@@ -2,7 +2,7 @@
 
 import styles from "../Login.module.css";
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { AuthContext, UserContext } from "../../context-provider";
+import { AuthContext, UserContext } from "../../ContextProvider";
 import * as userServices from '../../api/services/user'
 import { LoginContext } from "../login-provider";
 import Image from 'next/image'
@@ -60,44 +60,30 @@ export default function SignUp() {
   }
 
   return (
-    <>
-      <LogoBox />
+    <form onSubmit={handleSubmit}>
+      <div className={styles.loginFieldRowStacked}>
+        <label htmlFor="text22">Screen Name</label>
+        <input d="text22" type="text" value={username} onChange={e => setUsername(e.target.value)} />
 
-      <form onSubmit={handleSubmit}>
-        <div className={styles.loginFieldRowStacked}>
-          <label htmlFor="text22">Screen Name</label>
-          <input id="text22" type="text" value={username} onChange={e => setUsername(e.target.value)} />
-        </div>
-        {unique ? <></> : <><p style={{ color: 'red', fontStyle: "italic" }}>Error: an account with that username already exists.</p></>}
-        <div className={styles.loginFieldRowStacked}>
-          <label htmlFor="text23">Password</label>
-          <input id="text23" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </div>
-        <p style={{ color: 'red', marginTop: '3px' }}>Required.  &nbsp; Letters, numbers, @/./+/-/_ only.
-        </p>
-        <div className={styles.loginFieldRowStacked}>
-          <label htmlFor="text24">Confirm Password</label>
-          <input id="text24" type="password" value={check} onChange={e => setCheck(e.target.value)} />
-          {(password === check) ? <></> : <><p style={{ color: 'red', fontStyle: "italic" }}>Error: passwords do not match.</p></>}
-        </div>
+      </div>
 
-        {/* <div className={styles.loginFieldRowStacked}>
-          <input type="checkbox" id="example1" />
-          <label htmlFor="example1">Save Password</label>
-        </div> */}
+      {unique ? <></> : <><p style={{ color: 'red', fontStyle: "italic" }}>Error: an account with that username already exists.</p></>}
 
-        {/* <div className={styles.loginFieldRowStacked}>
-          <input checked type="checkbox" id="example2" />
-          <label htmlFor="example2">Save Password</label>
-        </div> */}
+      <div className={styles.loginFieldRowStacked}>
+        <label htmlFor="text23">Password</label>
+        <input id="text23" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </div>
 
-        {/* <div className={styles.loginFieldRowStacked}>
-          <input disabled type="checkbox" id="example3" />
-          <label htmlFor="example3">Auto-login</label>
-        </div> */}
+      <p style={{ color: 'red', marginTop: '3px' }}>Required.  &nbsp; Letters, numbers, @/./+/-/_ only.
+      </p>
 
-        <ButtonBox />
-      </form>
-    </>
+      <div className={styles.loginFieldRowStacked}>
+        <label htmlFor="text24">Confirm Password</label>
+        <input id="text24" type="password" value={check} onChange={e => setCheck(e.target.value)} />
+        {(password === check) ? <></> : <><p style={{ color: 'red', fontStyle: "italic" }}>Error: passwords do not match.</p></>}
+      </div>
+
+      <ButtonBox />
+    </form>
   )
 }

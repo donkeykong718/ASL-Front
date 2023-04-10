@@ -12,7 +12,7 @@ import Window from '../components/Window'
 // import Signin from './Signin/page'
 // import Signup from './Signup/page'
 import Dialup from './Dialup'
-import { AuthContext } from "../context-provider";
+import { AuthContext } from "../ContextProvider";
 import useSound from "use-sound";
 import LogoBox from './Logo'
 import ButtonBox from "./Buttonbox";
@@ -37,6 +37,9 @@ export default function LoginProivder({ children }) {
 
   if (login) {
     router.push('/login/signin')
+  }
+  else {
+    router.push('login/signup')
   }
   // useEffect(async () => {
   //   async function getAllUsers() {
