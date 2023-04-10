@@ -120,11 +120,11 @@ export default function Window({ children, mainWindow, title }) {
 
             <li className="signoff" onClick={() => {
               playGoodbye()
-              userFunctions.logOff()
               setUser({})
               setAuth(false)
+              userFunctions.logOff()
               console.log('Sign off has been clicked')
-              console.log(localStorage.getItem('user'));
+              // console.log(localStorage.getItem('user'));
               router.push('/login')
             }}>
 

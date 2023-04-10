@@ -55,7 +55,7 @@ export default function Dialup() {
   useEffect(() => {
 
     console.log('Countdown started')
-    setTimeout(() => { router.push('/home') }, 26000)
+    setTimeout(() => { router.push('/home') }, 2000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

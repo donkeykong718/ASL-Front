@@ -32,7 +32,11 @@ export default function ContextProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
+  Window.onbeforeunload = function () {
+    localStorage.clear();
+    setAuth(false);
+    return '';
+  }
 
   return (
     <>
