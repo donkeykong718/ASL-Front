@@ -13,11 +13,9 @@ export const UserContext = React.createContext();
 export default function ContextProvider({ children }) {
 
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ username: 'none' });
 
   const router = useRouter();
-
-  const defaultUser = { username: 'none' }
 
   useEffect(() => {
 
@@ -29,7 +27,6 @@ export default function ContextProvider({ children }) {
       // router.push('/home')
     }
     else {
-      setUser(defaultUser)
       router.push('/login')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
