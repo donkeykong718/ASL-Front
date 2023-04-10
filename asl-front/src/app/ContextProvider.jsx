@@ -38,7 +38,7 @@ export default function ContextProvider({ children }) {
     <>
       <AuthContext.Provider value={{ auth, setAuth }}>
         <UserContext.Provider value={{ user, setUser }}>
-          <Window mainWindow='true' title={`Welcome to A/S/L! ${user.username ? `You are logged in as ${user.username}` : `You are not logged on`}`} >{children}</Window>
+          <Window mainWindow='true' title={`Welcome to A/S/L!`} >{children}</Window>
         </UserContext.Provider>
       </AuthContext.Provider>
     </>
