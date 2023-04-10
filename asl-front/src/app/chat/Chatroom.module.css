@@ -38,7 +38,7 @@
   border: #8e8d86 1px solid;
   background-color: #ffffff;
   height: 40vh;
-  width: 21%;
+  width: 200px;
   overflow-y: scroll;
   margin-right: 10px;
 }
@@ -61,7 +61,8 @@
 
 .activeUser {
   color: black;
-  margin: 0;
+  margin: 1px 0 1px 5px;
+  height: 20px;
 }
 
 .toolBar {

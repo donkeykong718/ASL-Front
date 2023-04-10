@@ -19,7 +19,7 @@ export default function ChatLayout({ children }) {
   const [rooms, setRooms] = useState([])
 
   const router = useRouter();
-  const { name } = useParams();
+  const { category, name } = useParams();
   const [socketUrl, setSocketUrl] = useState('')
   // console.log("user token" + user.token)
 
@@ -27,7 +27,7 @@ export default function ChatLayout({ children }) {
   useEffect(() => {
     const stringuser = localStorage.getItem('user')
     const user = JSON.parse(stringuser)
-    setSocketUrl(`ws://asl-back.herokuapp.com/chats/${name}/?token=${user.token}`)
+    setSocketUrl(`ws://asl-back.herokuapp.com/chats/${category}/${name}/?token=${user.token}`)
   }, [])
 
   console.log(name);
@@ -36,7 +36,7 @@ export default function ChatLayout({ children }) {
     async function getAllRooms() {
       const roomList = await chatServices.getRooms()
       const roomArray = roomList.map(item => item.name)
-      console.log(roomArray);
+      console.log(roomArray)
       if (roomArray.includes(name)) { setRoom(name) }
     }
     getAllRooms();

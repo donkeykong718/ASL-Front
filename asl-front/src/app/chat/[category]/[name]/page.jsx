@@ -1,6 +1,6 @@
 'use client';
 
-import styles from '../Chatroom.module.css'
+import styles from '../../Chatroom.module.css'
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import ReactQuill from "react-quill";
@@ -9,11 +9,11 @@ import React, { useContext, useState, useEffect } from 'react'
 import ListBuddy from './ListBuddy';
 import ChatLine from './Chatline';
 import { useParams, useRouter } from 'next/navigation';
-import * as chatFunctions from '../../api/services/chatrooms'
-import * as userFunctions from '../../api/services/user'
+import * as chatFunctions from '../../../api/services/chatrooms'
+import * as userFunctions from '../../../api/services/user'
 import useSound from 'use-sound';
-import { RoomContext, SocketContext } from '../layout'
-import { AuthContext, UserContext } from '../../ContextProvider';
+import { RoomContext, SocketContext } from '../../layout'
+import { AuthContext, UserContext } from '../../../ContextProvider';
 
 const modules = {
   toolbar: [
@@ -64,7 +64,7 @@ export default function Chatroom() {
   // const { name } = useParams();
 
 
-  const { name } = useParams();
+  const { category, name } = useParams();
   const roomName = name;
 
   const [playSend] = useSound('/assets/sounds/imsend.wav')
@@ -80,15 +80,9 @@ export default function Chatroom() {
       // },
       onOpen: () => {
         console.log("Connected!");
-        console.log(user)
-        console.log(user.token)
-        console.log(readyState)
-
       },
       onClose: () => {
         console.log("Disconnected!");
-        console.log(user)
-        console.log(user.token)
       },
       onMessage: (e) => {
         const data = JSON.parse(e.data);
@@ -107,6 +101,14 @@ export default function Chatroom() {
           case "user_join":
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
+                const setGreeting = {
+                  from_user: "Host", content: `${user.username} has joined the chat.`
+                }
+                if (messageHistory != undefined) {
+                  setMessageHistory((prev) => [setGreeting, ...prev]);
+                  console.log(messageHistory)
+                }
+
                 return [...pcpts, data.user];
               }
               return pcpts;
@@ -114,6 +116,9 @@ export default function Chatroom() {
             break;
           case "user_leave":
             setParticipants((pcpts) => {
+              const setGreeting = { from_user: 'Host', content: `${user.username} has left the chat.` }
+              setMessageHistory((prev) => [setGreeting, ...prev])
+
               const newPcpts = pcpts.filter((x) => x !== data.user);
               return newPcpts;
             });
@@ -163,7 +168,9 @@ export default function Chatroom() {
         const data = await apiRes.json();
         console.log(data.results[0])
         setHasMoreMessages(data.next !== null);
+        // const setGreeting = { from_user: "Host", content: `${user.username} has logged on.` }
         setMessageHistory((prev) => [data.results[0], ...prev]);
+        console.log('The messageHistory is:')
         console.log(messageHistory)
       }
     }
@@ -208,16 +215,25 @@ export default function Chatroom() {
     <div className={styles.chatContainer}>
       <div className={styles.chatCol}>
         <div className={styles.chatWindow}>
-          {messageHistory.map((message, index) => (<ChatLine message={message} key={index} />))}
+          {messageHistory.map((message, index) => (message && <ChatLine message={message} key={index} />))}
         </div>
         <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
         <button className={styles.submitButton} onClick={() => { handleSubmit() }}>Send!</button>
       </div>
       <div className={styles.buddyCol}>
-        <p className={styles.userList}>{pcpts.length} people here</p>
-        <div className={styles.buddyList}>
-          {pcpts.map((user, index) => (<ListBuddy user={user} key={index} />))}
-        </div>
+        {(pcpts.length === 1) ?
+          <>
+            <p className={styles.userList}>{pcpts.length} person here</p>
+            <div className={styles.buddyList}>
+              <ListBuddy user={pcpts[0]} key={0} />
+            </div>
+          </> :
+          <>
+            <p className={styles.userList}>{pcpts.length} people here</p>
+            <div className={styles.buddyList}>
+              {pcpts.map((user, index) => (<ListBuddy user={user} key={index} />))}
+            </div>
+          </>}
       </div>
     </div>
   )
