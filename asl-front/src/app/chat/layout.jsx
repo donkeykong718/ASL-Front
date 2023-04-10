@@ -27,7 +27,7 @@ export default function ChatLayout({ children }) {
   useEffect(() => {
     const stringuser = localStorage.getItem('user')
     const user = JSON.parse(stringuser)
-    setSocketUrl(`ws://asl-back.herokuapp.com/chats/${category}/${name}/?token=${user.token}`)
+    setSocketUrl(`wss://asl-back.herokuapp.com/chats/${category}/${name}/?token=${user.token}`)
   }, [])
 
   console.log(name);
