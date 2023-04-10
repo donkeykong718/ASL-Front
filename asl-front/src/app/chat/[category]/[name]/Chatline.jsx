@@ -1,4 +1,4 @@
-import styles from '../Chatroom.module.css'
+import styles from '../../Chatroom.module.css'
 // import { parse } from 'node-html-parser';
 import Parser from 'html-react-parser';
 
@@ -6,8 +6,11 @@ export default function ChatLine({ message }) {
 
   console.log(message)
   const { content, from_user } = message;
+  let rtf;
   const spanText = content?.replace('<p>', '<span className={styles.chatText}>').replace('</p>', '</span>');
-  const rtf = Parser(spanText)
+  if (spanText) {
+    rtf = Parser(spanText);
+  }
 
   // console.log(rtf)
   // // console.log(rtf.childNodes[0]);
@@ -15,8 +18,10 @@ export default function ChatLine({ message }) {
 
   return (
     <>
-      <p className={styles.message} >
-        <span className={styles.chatUser}>{from_user.username}: </span>{rtf}</p>
+      {rtf ?
+        <p className={styles.message} >
+          <span className={styles.chatUser}>{(from_user != 'Host') ? <>{from_user.username}</> : <>{from_user}</>}</span>: {rtf}</p>
+        : <></>}
     </>
 
   )
