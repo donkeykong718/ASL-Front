@@ -4,18 +4,22 @@ import Parser from 'html-react-parser';
 
 export default function ChatLine({ message }) {
 
-  if (message != null) {
-    const { content, from_user } = message;
-    const spanText = content?.replace('<p>', '<span className={styles.chatText}>').replace('</p>', '</span>');
-    const rtf = Parser(spanText)
-  }
+  // if (message != null) {
+  console.log(message)
+  const { content, from_user } = message;
+  const spanText = content?.replace('<p>', '<span className={styles.chatText}>').replace('</p>', '</span>');
+  const rtf = Parser(spanText)
+  // }
   // console.log(rtf)
   // // console.log(rtf.childNodes[0]);
   // // console.log(Parser(text))
 
   return (
-    <>    {message ? <p className={styles.message} >
-      <span className={styles.chatUser}>{from_user.username}: </span>{rtf}</p> : <></>}
+    <>
+      {/* {message ? */}
+      <p className={styles.message} >
+        <span className={styles.chatUser}>{from_user.username}</span>{rtf}</p>
+      {/* : <></>} */}
     </>
 
   )

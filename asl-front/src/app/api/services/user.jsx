@@ -54,3 +54,7 @@ export const signin = async (username, password) => {
     throw error;
   }
 };
+
+export const logOff = () => {
+  localStorage.clear();
+}

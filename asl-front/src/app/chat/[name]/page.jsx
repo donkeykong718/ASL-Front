@@ -13,7 +13,7 @@ import * as chatFunctions from '../../api/services/chatrooms'
 import * as userFunctions from '../../api/services/user'
 import useSound from 'use-sound';
 import { RoomContext } from '../layout'
-import { UserContext } from '@/app/layout';
+import { AuthContext, UserContext } from '../../context-provider';
 
 const modules = {
   toolbar: [
@@ -37,8 +37,8 @@ const formats = [
   'underline'
 ]
 
-// const currentUser = 'admin'
-// const currentPassword = 'password'
+const currentUser = 'admin'
+const currentPassword = 'password'
 
 export default function Chatroom() {
 
@@ -71,57 +71,24 @@ export default function Chatroom() {
   const [playOpen] = useSound('assets/sounds/dooropen.wav')
   const [playClose] = useSound('assets/sounds/doorslam.wav')
 
-  useEffect(() => {
-    async function loadPage() {
-
-      const roomInfo = await chatFunctions.getaRoom(name)
-      setRoom(roomInfo)
-      console.log(roomInfo)
-
-      const stringUser = localStorage.getItem('user')
-      const currentUser = JSON.parse(stringUser)
-      // if (currentUser) {
-      // const currentUser = jsonUser.username;
-      console.log('The current user is:')
-      console.log(currentUser)
-      setUser(currentUser);
-      // }
-      fetchMessages();
-      // console.log('The user is')
-      // console.log(user)
-      // console.log('The name of the room is')
-      // console.log(roomName)
-    }
-    loadPage();
-    // else { router.push('/login') }
-  }, [])
-
-  // async function checkPage() {
-  //   const result = await chatFunctions.getaRoom(name)
-  //   if (result.status === 200) {
-  //     const roomInfo = await result.json();
-  //     setRoom(roomInfo)
-  //   }
-  // else {
-  //   router.push('/404')
-  // }
-  // }
-
-  // useEffect(() => {
-  //   fetchMessages();
-  // }, [])
-
+  const userToken = user.token
   const { readyState, sendJsonMessage } = useWebSocket(
-    user ? `wss://asl-back.herokuapp.com/chats/${roomName}` : null,
+    user ? `ws://asl-back.herokuapp.com/chats/${roomName}` : null,
     {
       queryParams: {
-        token: user ? user.token : "",
+        token: userToken || ""
       },
       onOpen: () => {
         console.log("Connected!");
+        console.log(user)
+        console.log(user.token)
+        console.log(readyState)
+
       },
       onClose: () => {
         console.log("Disconnected!");
+        console.log(user)
+        console.log(user.token)
       },
       // onMessage handler
       onMessage: (e) => {
@@ -135,10 +102,11 @@ export default function Chatroom() {
             break;
           case "last_50_messages":
             setMessageHistory(data.messages);
+            console.log(messageHistory);
             setHasMoreMessages(data.has_more);
             break;
           case "user_join":
-            playOpen();
+            // playOpen();
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
                 return [...pcpts, data.user];
@@ -147,7 +115,7 @@ export default function Chatroom() {
             });
             break;
           case "user_leave":
-            playClose();
+            // playClose();
             setParticipants((pcpts) => {
               const newPcpts = pcpts.filter((x) => x !== data.user);
               return newPcpts;
@@ -167,6 +135,72 @@ export default function Chatroom() {
     }
   );
 
+  useEffect(() => {
+    async function loadPage() {
+
+      const roomInfo = await chatFunctions.getaRoom(name)
+      setRoom(roomInfo)
+      console.log(roomInfo)
+
+      const user = await userFunctions.signin(username, password)
+      setUser(user);
+
+      // const stringUser = localStorage.getItem('user')
+      // const currentUser = JSON.parse(stringUser)
+      // if (currentUser) {
+      // const currentUser = jsonUser.username;
+      // console.log('The current user is:')
+      // console.log(currentUser)
+      // setUser(currentUser);
+      // }
+      // console.log('The user is')
+      // console.log(user)
+      // console.log('The name of the room is')
+      // console.log(roomName)
+    }
+
+    async function fetchMessages() {
+      const apiRes = await fetch(
+        `https://asl-back.herokuapp.com/messages/?conversation=${roomName}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Token ${user.token}`,
+          },
+        }
+      );
+      if (apiRes.status === 200) {
+        const data = await apiRes.json();
+        console.log(data.results[0])
+        setHasMoreMessages(data.next !== null);
+        setMessageHistory((prev) => [data.results[0], ...prev]);
+        console.log(messageHistory)
+      }
+    }
+    loadPage();
+    fetchMessages();
+    // else { router.push('/login') }
+  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    , [])
+
+  // async function checkPage() {
+  //   const result = await chatFunctions.getaRoom(name)
+  //   if (result.status === 200) {
+  //     const roomInfo = await result.json();
+  //     setRoom(roomInfo)
+  //   }
+  // else {
+  //   router.push('/404')
+  // }
+  // }
+
+  // useEffect(() => {
+  //   fetchMessages();
+  // }, [])
+
   const handleSubmit = () => {
     let message = value;
     sendJsonMessage({
@@ -174,31 +208,12 @@ export default function Chatroom() {
       message,
     });
     setValue("");
-    playSend();
+    // playSend();
   }
 
-  async function fetchMessages() {
-    const apiRes = await fetch(
-      `https://asl-back.herokuapp.com/messages/?conversation=${roomName}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Token ${user?.token}`,
-        },
-      }
-    );
-    if (apiRes.status === 200) {
-      const data = await apiRes.json();
-      console.log(data.results[0])
-      setHasMoreMessages(data.next !== null);
-      setMessageHistory((prev) => [data.results[0], ...prev]);
-      console.log(messageHistory)
-    }
-  }
-
-  useEffect(() => { playReceive() }, [messageHistory])
+  // useEffect(() => { playReceive() }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // , [messageHistory])
 
   return (
     <div className={styles.chatContainer}>

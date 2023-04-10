@@ -1,23 +1,29 @@
 "use client";
 
-import useSound from 'use-sound'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Window from '../components/Window'
+import Image from 'next/image'
+import style from './Home.module.css'
+import Link from 'next/link';
 
 export default function Home() {
 
-  const [playModem] = useSound('/assets/sounds/dial-up-modem.wav')
   const router = useRouter()
 
   useEffect(() => {
-    playModem()
+
     console.log('Countdown started')
-    setTimeout(() => { router.push('/categories') }, 26000)
+    // setTimeout(() => { router.push('/categories') }, 26000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
-    <div>
-      Something.
-    </div>
+    <Window title="A/S/L Channels">
+      <Image src='/assets/images/aol-channels.jpg'
+        width={700}
+        height={400} />
+      <button onClick={() => { router.push('/categories') }} className={style.chatChannel}>Chat!</button>
+    </Window>
   )
 }

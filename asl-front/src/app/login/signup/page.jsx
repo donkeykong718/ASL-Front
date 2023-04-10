@@ -1,27 +1,34 @@
 "use client";
 
-import styles from "../login/Login.module.css";
+import styles from "../Login.module.css";
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { AuthContext } from "../layout";
-import * as userServices from '../api/services/user'
-import { LoginContext } from "./page";
+import { AuthContext, UserContext } from "../../context-provider";
+import * as userServices from '../../api/services/user'
+import { LoginContext } from "../login-provider";
+import Image from 'next/image'
+import useSound from "use-sound";
+import ButtonBox from '../Buttonbox'
+import LogoBox from '../Logo'
 
 
 export default function SignUp() {
   const { auth, setAuth } = useContext(AuthContext)
+  const { user, setUser } = useContext(UserContext)
   const { login, setLogin } = useContext(LoginContext)
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [check, setCheck] = useState('')
   const [users, setUsers] = useState([])
   const [unique, setUnique] = useState(true)
+  const [playError] = useSound('/assets/sounds/quickerror.mp3')
 
-  useEffect(async () => {
+  useEffect(() => {
     async function getAllUsers() {
       const userList = await userServices.getUsers()
-      const userArray = userList.map(item => item.username)
-      console.log(userArray);
-      setUsers(userArray);
+      // const userArray = userList.map(item => item.username)
+      console.log(userList);
+      // setUsers(userArray);
     }
     getAllUsers()
 
@@ -32,34 +39,29 @@ export default function SignUp() {
     if (users.includes(username)) {
       setUnique(false);
       setUsername('');
+      playError();
     }
     if (password === check) {
       const response = await userServices.signup(username, password);
       console.log('The response is:')
       console.log(response)
-      setAuth(true)
-      setLogin(true)
+      if (response.status === 200) {
+        setUser(response)
+        setAuth(true)
+        setLogin(true)
+      }
+      else {
+        playError();
+      }
+    }
+    else {
+      playError();
     }
   }
 
   return (
     <>
-      <div className={styles.aolBox}>
-        <div className={styles.logoContainer}>
-          <img
-            src="/assets/images/cool-man.png"
-            alt=""
-            className={styles.logo2}
-          />
-        </div>
-        <div className={styles.ASLTitle}>
-          <img
-            src="/assets/images/ASL-logo-text.png"
-            alt=""
-            className={styles.ASLLogo}
-          />
-        </div>
-      </div>
+      <LogoBox />
 
       <form onSubmit={handleSubmit}>
         <div className={styles.loginFieldRowStacked}>
@@ -94,29 +96,7 @@ export default function SignUp() {
           <label htmlFor="example3">Auto-login</label>
         </div> */}
 
-        <div className={styles.loginBottomBtns}>
-          <button className={styles.helpBtn}>
-            <img src="/assets/images/helpbtn.png" alt="Help Button" />
-          </button>
-
-          <div className={styles.loginBottomBtns}>
-            <button className={styles.setupBtn}>
-              <img src="/assets/images/setupbtn.png" alt="Set Up Button" />
-            </button>
-          </div>
-
-          <div className={styles.loginBottomBtns}>
-
-            <button
-              className={styles.signupBtn}
-            >
-              <img style={{ maxHeight: '25px' }}
-                src="/assets/images/cool-man.png"
-              />
-              Sign-up
-            </button>
-          </div>
-        </div>
+        <ButtonBox />
       </form>
     </>
   )
