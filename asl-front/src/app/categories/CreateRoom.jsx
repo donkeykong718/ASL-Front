@@ -41,7 +41,7 @@ export default function CreateRoom(props) {
     const selectNewRoomCategory = selectRef.current.value
     // console.log("Input Room Name:", inputRoomName)
     // console.log("Selected Category:", selectNewRoomCategory)
-    location.href = `/chat/${selectNewRoomCategory}/$${inputRoomName}`
+    location.href = `/chat/${selectNewRoomCategory}/${inputRoomName}`
   }
 
 
