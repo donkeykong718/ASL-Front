@@ -1,7 +1,13 @@
+'use client';
+
 import styles from './Login.module.css'
 import Image from 'next/image'
+import { useState, useContext } from 'react'
+import { LoginContext } from './login-provider'
 
 export default function ButtonBox() {
+
+  const { login, setLogin } = useContext(LoginContext)
 
   return (
     <div className={styles.loginBottomBtns}>
@@ -12,7 +18,7 @@ export default function ButtonBox() {
       </button>
 
       <div className={styles.loginBottomBtns}>
-        <button className={styles.setupBtn}>
+        <button onClick={() => { setLogin(false) }} className={styles.setupBtn}>
           <Image src="/assets/images/setupbtn.png" alt="Set Up Button"
             height={38}
             width={38} />

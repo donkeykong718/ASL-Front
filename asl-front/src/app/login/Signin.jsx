@@ -40,10 +40,12 @@ export default function Signin() {
       const response = await userFunctions.signin(username, password);
       console.log('The response is:')
       console.log(response);
-      if (response) {
+
+      //This doesn't work for some reason
+      if (response.status === 200) {
         setUser(response)
         setAuth(true);
-        router.refresh()
+        router.refresh();
       }
       else {
         playError();
@@ -57,11 +59,21 @@ export default function Signin() {
     }
   }
 
+  const clearError = e => {
+    setUsername(e.target.value)
+    setError(false)
+  }
+
+  const clearError2 = e => {
+    setPassword(e.target.value)
+    setError2(false)
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.loginFieldRowStacked}>
         <label htmlFor="text22">Screen Name</label>
-        <input id="text22" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+        <input id="text22" type="text" value={username} onChange={clearError} />
       </div>
 
       {error ? <><p style={{ color: "red", fontStyle: "italic", fontWeight: 'bold' }}>Username not found.</p><p>Click on &apos;Help&apos; to create an account.</p></> : <></>}
@@ -69,7 +81,7 @@ export default function Signin() {
 
       <div className={styles.loginFieldRowStacked}>
         <label htmlFor="text23">Password</label>
-        <input id="text23" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input id="text23" type="password" value={password} onChange={clearError2} />
       </div>
 
       <div className={styles.loginFieldRowStacked}>
