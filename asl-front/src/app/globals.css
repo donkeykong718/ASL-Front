@@ -30,6 +30,9 @@ margin: 20px;
 }
 
 .window {
+  position:relative;
+  
+
   /* position: fixed; */
   display: flex;
   flex-direction: column;
