@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react'
 import Window from './components/Window'
 import Image from 'next/image'
 import styles from './page.module.css'
-import { AuthContext, UserContext } from './ContextProvider';
+import { AuthContext } from './ContextProvider';
 
 export default function Home() {
 

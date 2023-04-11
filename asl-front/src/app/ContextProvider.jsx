@@ -1,7 +1,7 @@
 "use client";
 
-import './globals.css'
-import '98.css'
+// import './globals.css'
+// import '98.css'
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Window from './components/Window'
@@ -37,13 +37,6 @@ export default function ContextProvider({ children }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  // window.onbeforeunload = function () {
-  //   setAuth(false);
-  //   setUser({})
-  //   localStorage.clear();
-  //   return '';
-  // }
 
   return (
     <>

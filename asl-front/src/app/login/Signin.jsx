@@ -13,7 +13,7 @@ import ButtonBox from "./Buttonbox";
 export default function Signin() {
   const { auth, setAuth } = useContext(AuthContext)
   const { user, setUser } = useContext(UserContext)
-  const { login, setLogin } = useContext(LoginContext)
+  // const { login, setLogin } = useContext(LoginContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [users, setUsers] = useState([])
@@ -42,7 +42,6 @@ export default function Signin() {
       console.log('The response is:')
       console.log(response);
 
-      //This doesn't work for some reason
       if (response.name === 'AxiosError') {
         playError();
         setError2(true)
