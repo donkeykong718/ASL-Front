@@ -40,6 +40,10 @@ export default function Dialup() {
     <div className={styles.animationContainer}>
       <audio ref={audioRef} src="/assets/sounds/dial-up-modem.wav" autoPlay />
       <Image className={styles.animationImage} src={images[imageIndex]} height={350} width={600} alt='' />
+      <button onClick={() => {
+        clearInterval();
+        router.push('/')
+      }} className={styles.cancelButton}>Cancel</button>
     </div>
   )
 }

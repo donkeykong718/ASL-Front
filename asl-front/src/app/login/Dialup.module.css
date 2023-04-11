@@ -11,3 +11,30 @@
   width: 800;
   height: auto;
 }
+
+.cancelButton {
+  position: absolute;
+  color: white;
+  border: white 1px solid;
+  height: 10%;
+  width: 25%;
+  font-size: 2em;
+  background-color: #026ca4;
+  box-shadow: (30px 15px 10px #909495);
+  transform: translate(130%, 130%);
+  padding: 0 10px;
+}
+
+.chatChannel {
+  position: absolute;
+  height: 10%;
+  width: 29.5%;
+  border: black solid 2px;
+  transform: translate(-110%, 500%);
+  font-size: 2.5em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  text-align: left;
+  padding-left: 3.25%;
+  background-color: aqua;
+}

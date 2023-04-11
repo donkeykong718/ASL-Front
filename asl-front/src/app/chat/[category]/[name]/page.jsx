@@ -15,6 +15,7 @@ import useSound from 'use-sound';
 import { RoomContext, SocketContext } from '../../layout'
 import { AuthContext, UserContext } from '../../../ContextProvider';
 import Link from 'next/link';
+import { onKeyUp } from 'react-bootstrap'
 
 const modules = {
   toolbar: [
@@ -166,6 +167,7 @@ export default function Chatroom() {
     setValue("");
   }
 
+
   const handleDelete = async () => {
     confirm(`Are you sure you want to delete ${user.username}?`)
     const deletedUser = await userFunctions.deleteUrAccount(user);
@@ -182,14 +184,20 @@ export default function Chatroom() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     , [messageHistory])
 
+  onkeydown = (e) => { if (e.charChode === 13) { handleSubmit } };
+
+
+
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatCol}>
         <div className={styles.chatWindow}>
           {messageHistory.map((message, index) => (message && <ChatLine message={message} key={index} />))}
         </div>
-        <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
-        <button className={styles.submitButton} onClick={() => { handleSubmit() }}>Send!</button>
+        <div className={styles.chatModule}>
+          <ReactQuill modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
+          <button className={styles.submitButton} onClick={() => { handleSubmit() }}>Send!</button>
+        </div>
       </div>
       <div className={styles.buddyCol}>
         <Link href='/categories'>Go back to room selection</Link>
