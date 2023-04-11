@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 export default function LogoBox() {
 
-  const rickRolls = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=hGlyFc79BUE", "https://www.youtube.com/watch?v=q3XezETe7JY", "https://www.youtube.com/watch?v=Pk-kbjw0Y8U"]
+  const rickRolls = ["https://www.youtube.com/watch?v=hGlyFc79BUE", "https://www.youtube.com/watch?v=q3XezETe7JY", "https://www.youtube.com/watch?v=Pk-kbjw0Y8U", "https://www.youtube.com/watch?v=FTQbiNvZqaY"]
 
   const easterEgg = Math.floor(Math.random() * rickRolls.length);
 

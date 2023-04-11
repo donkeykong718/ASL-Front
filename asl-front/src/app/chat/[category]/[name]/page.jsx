@@ -172,6 +172,12 @@ export default function Chatroom() {
     console.log(deletedUser)
   }
 
+  const handleEdit = async () => {
+    const newName = prompt(`What would you like your new name to be?`)
+    const newUser = await userFunctions.changeUrName(user, newName);
+    console.log(newUser)
+  }
+
   useEffect(() => { playReceive() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     , [messageHistory])
@@ -201,7 +207,9 @@ export default function Chatroom() {
             </div>
           </>}
       </div>
-      <p>If you ever get pwned too badly:</p><Link onClick={handleDelete} href='/login'>Delete ur account</Link>
+      <div className={styles.linkBox}>
+        <p>If you ever get pwned too badly, you have a choice:</p><Link className={styles.link} onClick={handleEdit} href='/login'>Change ur Name</Link><Link className={styles.link} onClick={handleDelete} href='/login'>Delete ur account</Link>
+      </div>
     </div>
   )
 }
