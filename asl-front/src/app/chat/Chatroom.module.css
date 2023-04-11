@@ -100,3 +100,12 @@
 .submitButton:hover {
   cursor: url("/assets/cursors/windows-98/Cursor107.cur"), auto;
 }
+
+.linkBox {
+  display: flex;
+  padding: 5px;
+}
+
+.link {
+  margin-left: 20px;
+}

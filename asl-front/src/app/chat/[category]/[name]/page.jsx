@@ -207,7 +207,9 @@ export default function Chatroom() {
             </div>
           </>}
       </div>
-      <p>If you ever get pwned too badly, you have a choice:</p><Link onClick={handleEdit} href='/login'>Change ur Name</Link><Link onClick={handleDelete} href='/login'>Delete ur account</Link>
+      <div className={styles.linkBox}>
+        <p>If you ever get pwned too badly, you have a choice:</p><Link className={styles.link} onClick={handleEdit} href='/login'>Change ur Name</Link><Link className={styles.link} onClick={handleDelete} href='/login'>Delete ur account</Link>
+      </div>
     </div>
   )
 }
