@@ -54,6 +54,21 @@ export const signin = async (username, password) => {
   }
 };
 
+export const changeUrName = async (user, newName) => {
+  try {
+    console.log(user)
+    const response = await api.put(`/user/${user.id}`)
+    localStorage.clear();
+    localStorage.setItem('user', user);
+    console.log(`Are you ${user.username} or ${newName}? Only time will tell!`)
+    return response.data;
+  }
+  catch (error) {
+    return (error)
+  }
+
+}
+
 export const deleteUrAccount = async (user) => {
   try {
     console.log(user)
