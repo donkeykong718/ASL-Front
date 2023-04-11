@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
 
     console.log('Countdown started')
-    // setTimeout(() => { router.push('/categories') }, 26000)
+    setTimeout(() => { router.push('/categories') }, 26000)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
