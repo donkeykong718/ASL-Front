@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import useSound from "use-sound";
 import styles from "./Dial-up.module.css";
+import { useRouter } from "next/router";
 
 export default function DialUp() {
   const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
@@ -16,6 +17,8 @@ export default function DialUp() {
     "/assets/images/dial_up2.png",
     "/assets/images/dial_up3.png",
     "/assets/images/dial_up4.png",
+    "/assets/images/warp_modem.gif"
+
   ];
 
   const nextImage = () => {
@@ -84,3 +87,5 @@ export default function DialUp() {
     </div>
   );
 }
+
+
