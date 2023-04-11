@@ -1,11 +1,13 @@
 .animationContainer {
+  position: relative;
+  max-width: 800px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
 }
 
 .animationImages {
   position: relative;
-  max-width: 60vw;
+  width: 800;
   height: auto;
 }

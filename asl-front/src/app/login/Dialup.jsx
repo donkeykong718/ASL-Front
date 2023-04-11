@@ -39,7 +39,7 @@ export default function Dialup() {
   return (
     <div className={styles.animationContainer}>
       <audio ref={audioRef} src="/assets/sounds/dial-up-modem.wav" autoPlay />
-      <Image className={styles.animationImage} src={images[imageIndex]} height={500} width={800} alt='' />
+      <Image className={styles.animationImage} src={images[imageIndex]} height={350} width={600} alt='' />
     </div>
   )
 }
