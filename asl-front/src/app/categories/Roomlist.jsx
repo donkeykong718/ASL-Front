@@ -13,33 +13,41 @@ export const RoomList = (props) => {
     let buttons = null;
     if (categoryOption === "") {
       buttons = conversation.map((option) => {
-        return (<button
-          type="button"
-          key={option.id}
-          className={styles.roomButtons}
-          onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
-        >{option.name}
-        </button>);
+        return (
+          <tr>
+            <button
+              type="button"
+              key={option.id}
+              className={styles.roomButtons}
+              onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
+            >{option.name}
+            </button>
+          </tr>
+        );
       });
     } else {
       buttons = conversation
         .filter((option) => option.category === categoryOption)
         .map((option) => {
-          return (<button
-            type="button"
-            key={option.id}
-            className={styles.roomButtons}
-            onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
-          >{option.name}
-          </button>);
+          return (
+            <tr>
+              <button
+                type="button"
+                key={option.id}
+                className={styles.roomButtons}
+                onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
+              >{option.name}
+              </button>
+            </tr>
+          )
         });
     }
     return buttons;
   }
 
   return (
-    <div className="room-list-display">
-      <h3>Choose a room</h3>
+    <div className={styles.roomListDisplay}>
+      <h3 className={styles.roomListTitle}>Choose a room</h3>
       <div class="sunken-panel" style={{ height: '120px', width: '240px' }}>
         <table class="interactive">
           <thead>
@@ -50,11 +58,10 @@ export const RoomList = (props) => {
             </tr>
           </thead>
           <tbody>
-
+            {setButtons()}
           </tbody>
         </table>
       </div>
-      {setButtons()}
     </div>
   )
 }

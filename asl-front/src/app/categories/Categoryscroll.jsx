@@ -16,8 +16,8 @@ export const CategoryScroll = (props) => {
   const categories = categoryChoice.length > 0 ? categoryChoice : finalCategoryList;
 
   return (
-    <div className="category-scroll-display">
-      <h3>Choose a category</h3>
+    <div className={styles.categoryScrollDisplay}>
+      <h3 className={styles.categoryScrollTitle}>Choose a category</h3>
       <div className="category-scroll-options">
         <div class="sunken-panel" style={{ height: '120px', width: '240px' }}>
           <table class="interactive">
@@ -29,22 +29,23 @@ export const CategoryScroll = (props) => {
               </tr>
             </thead>
             <tbody>
-
+              {categories.map(choice => {
+                return (
+                  <tr>
+                    <button
+                      className={styles.categoryScrollOptions}
+                      onClick={onClick}
+                      value={choice}
+                      type="button"
+                    >
+                      {choice}
+                    </button>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
-        {categories.map(choice => {
-          return (
-            <button
-              className="category-scroll-option"
-              onClick={onClick}
-              value={choice}
-              type="button"
-            >
-              {choice}
-            </button>
-          )
-        })}
       </div>
     </div>
   )

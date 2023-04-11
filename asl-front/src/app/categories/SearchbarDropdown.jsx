@@ -40,8 +40,8 @@ export const SearchbarDropdown = (props) => {
 
 
   return (
-    <div className="search-bar-dropdown">
-      <form onSubmit={onSubmit}>
+    <div className={styles.searchBarDropdown}>
+      <form className={styles.searchBarForm} onSubmit={onSubmit}>
         <div class="field-row-stacked" style={{ width: 200 }}>
           <label className={styles.searchBarLabel} for="searchBarField">Search All Chats by Topic:</label>
           <input

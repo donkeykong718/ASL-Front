@@ -1,4 +1,4 @@
-.searchBarLabel {
+/* .searchBarLabel {
   font-size: 15px;
   font-weight: bolder;
 }
@@ -15,19 +15,37 @@
   width: 250px;
 }
 
-/* .roomButtons {
-  display: flex;
-  flex-direction: column;
-} */
+.searchBarListItem {
+  background-color: #fff;
+}
 
 .roomListHeader {
-  width: 240px;
+  width: 280px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 30px;
+}
+
+.roomButtons {
+  width: 310px;
+  text-align: left;
+  font-size: 15px;
+  background-color: #fff;
 }
 
 .categoryHeader {
   width: 240px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 30px;
 }
 
+.categoryScrollOptions {
+  width: 240px;
+  text-align: left;
+  font-size: 15px;
+  background-color: #fff;
+}
 
 .createRoomDisplay {
   position: absolute;
@@ -39,4 +57,131 @@
   position: absolute;
   top: 250px;
   right: 50px;
+}
+
+.homeSearchButton {
+  height: 30px;
+  position: relative;
+  left: 255px;
+  bottom: 30px;
+  font-size: 15px;
+} */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.homeSearchTitle,
+.categoryScrollTitle,
+.roomListTitle {
+  margin: 10px 0px;
+}
+
+.homeSearchTitle,
+.searchBarForm {
+  position: relative;
+  left: 50px;
+}
+
+
+.searchBarLabel {
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.searchBarField {
+  width: 250px;
+  height: 30px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.searchBarList {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  position: absolute;
+  top: 52px;
+  left: 0px;
+  z-index: 1;
+}
+
+.searchBarListItem {
+  background-color: #fff;
+}
+
+.roomListHeader {
+  width: 280px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 30px;
+}
+
+.roomListDisplay {
+  position: relative;
+  left: 400px;
+  top: -174px;
+}
+
+.roomButtons {
+  width: 310px;
+  text-align: left;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+.categoryHeader {
+  width: 240px;
+  font-size: 20px;
+  font-weight: bolder;
+  height: 30px;
+}
+
+
+.categoryScrollDisplay {
+  position: relative;
+  left: 50px;
+}
+
+.categoryScrollOptions {
+  width: 240px;
+  text-align: left;
+  font-size: 15px;
+  background-color: #fff;
+}
+
+.createRoomDisplay {
+  position: relative;
+  top: -130px;
+  left: 50px;
+}
+
+.createRoomForm {
+  position: relative;
+}
+
+.createRoomLabel {
+  font-size: 15px;
+  position: relative;
+  left: 10px;
+}
+
+.createRoomInput,
+.createRoomCategoryDrop,
+.createRoomButton {
+  height: 22px;
+  width: 150px;
+  margin: 10px 0px;
+  font-size: 15px;
+}
+
+.homeSearchButton {
+  height: 30px;
+  position: absolute;
+  left: 320px;
+  top: 191px;
+  font-size: 15px;
 }
