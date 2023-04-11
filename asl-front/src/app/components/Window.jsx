@@ -1,13 +1,13 @@
 "use client";
 
 import { AuthContext, UserContext } from "../ContextProvider";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { Suspense, useContext, useEffect, useRef, useState } from "react";
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSound } from "use-sound";
 // import coolMan from '../../../public/assets/images / cool - man.png'
 import * as userFunctions from '../api/services/user'
-
+import Loading from '../components/Loading'
 
 export default function Window({ children, mainWindow, title }) {
 
@@ -142,11 +142,13 @@ export default function Window({ children, mainWindow, title }) {
           height={60}
         /> </> : <></>}
 
-      <div className='window-body'>
-        {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
-        {children}
-        {/* </AuthContext.Provider> */}
-      </div>
+      <Suspense fallback={<Loading />}>
+        <div className='window-body'>
+          {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
+          {children}
+          {/* </AuthContext.Provider> */}
+        </div>
+      </Suspense>
     </div>
   )
 }
