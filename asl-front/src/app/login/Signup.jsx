@@ -47,14 +47,14 @@ export default function SignUp() {
       const response = await userServices.signup(username, password);
       console.log('The response is:')
       console.log(response)
-      if (response) {
+      if (response.name === 'AxiosError') {
+        playError();
+      }
+      else {
         setUser(response)
         setAuth(true)
         setLogin(true)
         router.refresh()
-      }
-      else {
-        playError();
       }
     }
     else {

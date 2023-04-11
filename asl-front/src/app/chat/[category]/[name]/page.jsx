@@ -14,6 +14,7 @@ import * as userFunctions from '../../../api/services/user'
 import useSound from 'use-sound';
 import { RoomContext, SocketContext } from '../../layout'
 import { AuthContext, UserContext } from '../../../ContextProvider';
+import Link from 'next/link';
 
 const modules = {
   toolbar: [
@@ -103,23 +104,24 @@ export default function Chatroom() {
             setParticipants((pcpts) => {
               if (!pcpts.includes(data.user)) {
                 const setGreeting = {
-                  from_user: "Host", content: `${user.username} has joined the chat.`
+                  from_user: "Host", content: `${data.user} has joined the chat.`
                 }
                 if (messageHistory != undefined) {
-                  setMessageHistory((prev) => [setGreeting, ...prev]);
+                  setMessageHistory((prev) => [...prev, setGreeting]);
                   console.log(messageHistory)
                 }
-
                 return [...pcpts, data.user];
               }
+              console.log('It was you joining - nothing changed')
+              console.log(pcpts);
               return pcpts;
             });
             break;
           case "user_leave":
             playClose();
             setParticipants((pcpts) => {
-              const setGreeting = { from_user: 'Host', content: `${user.username} has left the chat.` }
-              setMessageHistory((prev) => [setGreeting, ...prev])
+              const setGreeting = { from_user: 'Host', content: `${data.user} has left the chat.` }
+              setMessageHistory((prev) => [...prev, setGreeting])
 
               const newPcpts = pcpts.filter((x) => x !== data.user);
               return newPcpts;
@@ -141,18 +143,6 @@ export default function Chatroom() {
 
 
   useEffect(() => {
-    // async function loadPage() {
-
-    //   const roomInfo = await chatFunctions.getaRoom(name)
-    //   setRoom(roomInfo)
-    //   console.log(roomInfo)
-
-    //   const stringUser = localStorage.getItem('user')
-    //   const currentUser = JSON.parse(stringUser)
-    //   console.log('The current user is:')
-    //   console.log(currentUser)
-
-    // }
 
     async function fetchMessages() {
       const apiRes = await fetch(
@@ -170,18 +160,13 @@ export default function Chatroom() {
         const data = await apiRes.json();
         console.log(data.results[0])
         setHasMoreMessages(data.next !== null);
-        // const setGreeting = { from_user: "Host", content: `${user.username} has logged on.` }
         setMessageHistory((prev) => [data.results[0], ...prev]);
         console.log('The messageHistory is:')
         console.log(messageHistory)
       }
     }
-    // loadPage();
-    fetchMessages();
-    // else { router.push('/login') }
-  }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    , [])
+    fetchMessages()
+  }, [])
 
   // async function checkPage() {
   //   const result = await chatFunctions.getaRoom(name)
@@ -223,6 +208,7 @@ export default function Chatroom() {
         <button className={styles.submitButton} onClick={() => { handleSubmit() }}>Send!</button>
       </div>
       <div className={styles.buddyCol}>
+        <Link href='/categories'>Go back to room selection</Link>
         {(pcpts.length === 1) ?
           <>
             <p className={styles.userList}>{pcpts.length} person here</p>
