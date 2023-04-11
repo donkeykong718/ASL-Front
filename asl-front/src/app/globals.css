@@ -80,3 +80,23 @@ button:hover {
 .signoff:hover {
   cursor: url("/assets/cursors/windows-98/Cursor107.cur"), pointer;
 }
+
+.loading-page {
+  cursor: url("/assets/cursors/windows-98/Cursor83.cur");
+  height: 100vh;
+  width: 100vw;
+  margin: auto;
+  animation: 2s infinite rotate;
+
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(180)
+  }
+
+}
