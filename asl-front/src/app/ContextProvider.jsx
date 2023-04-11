@@ -20,14 +20,17 @@ export default function ContextProvider({ children }) {
   useEffect(() => {
 
     const stringUser = localStorage.getItem('user')
-    if (stringUser !== undefined) {
+    if (stringUser != undefined && auth === false) {
       const currentUser = JSON.parse(stringUser)
       setUser(currentUser);
       setAuth(true);
       console.log('Auth is ' + auth)
       console.log(user)
 
-      // router.push('/home')
+    }
+    else if (stringUser != undefined && auth === true) {
+      console.log('Auth is ' + auth)
+      console.log(user)
     }
     else {
       router.push('/login')
@@ -35,18 +38,18 @@ export default function ContextProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  window.onbeforeunload = function () {
-    setAuth(false);
-    setUser({})
-    localStorage.clear();
-    return '';
-  }
+  // window.onbeforeunload = function () {
+  //   setAuth(false);
+  //   setUser({})
+  //   localStorage.clear();
+  //   return '';
+  // }
 
   return (
     <>
       <AuthContext.Provider value={{ auth, setAuth }}>
         <UserContext.Provider value={{ user, setUser }}>
-          <Window mainWindow='true' title={`Welcome to A/S/L! ${user ? `You are logged in as ${user.username}` : `You are not logged on`}`} >{children}</Window>
+          <Window mainWindow='true' title={`Welcome to A/S/L! ${(user && user.username !== 'none' && user !== undefined) ? `You are logged in as ${user.username}` : `You are not logged on`}`} >{children}</Window>
         </UserContext.Provider>
       </AuthContext.Provider>
     </>

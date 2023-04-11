@@ -33,8 +33,9 @@ export default function Signin() {
     getAllUsers();
   }, [])
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log('Submission')
     const userArray = users.map(item => item.username)
     if (userArray.includes(username)) {
       const response = await userFunctions.signin(username, password);
@@ -42,20 +43,19 @@ export default function Signin() {
       console.log(response);
 
       //This doesn't work for some reason
-      if (response) {
+      if (response.name === 'AxiosError') {
+        playError();
+        setError2(true)
+      }
+      else {
         setUser(response)
         setAuth(true);
         router.refresh();
-      }
-      else {
-        playError();
-        setError2(true)
       }
     }
     else {
       playError();
       setError(true);
-      console.log('No such user');
     }
   }
 

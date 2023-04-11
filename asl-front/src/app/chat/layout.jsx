@@ -21,6 +21,8 @@ export default function ChatLayout({ children }) {
   const router = useRouter();
   const { category, name } = useParams();
   const [socketUrl, setSocketUrl] = useState('')
+  console.log('category' + category)
+  console.log('name' + name)
   // console.log("user token" + user.token)
 
   const pathname = usePathname();
@@ -29,7 +31,7 @@ export default function ChatLayout({ children }) {
   let socketStart = 'wss';
 
   if (typeof window !== 'undefined') {
-    if (window.location.hostname === 'localhost') { const socketStart = 'ws' }
+    if (window.location.hostname === 'localhost') { socketStart = 'ws' }
   }
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function ChatLayout({ children }) {
     <>
       {(socketUrl != '') ?
         <SocketContext.Provider value={{ socketUrl, setSocketUrl }}>
-          <Window title={`ASL - ${room} Chat`}>{children}</Window>
+          <Window title={`ASL - ${decodeURI(name)} Chat`}>{children}</Window>
         </SocketContext.Provider> : <>Blank socket</>}
     </>
   )

@@ -1,13 +1,12 @@
 import api from "./apiConfig.js";
 
-const LOCALSTORAGE_KEY = 'token'
-
 export const getUser = async (id) => {
   try {
     const response = await api.get(`/users/${id}`);
     return response.data;
-  } catch (error) {
-    throw error;
+  }
+  catch (error) {
+    throw (error)
   }
 };
 
@@ -17,7 +16,7 @@ export const getUsers = async () => {
     return response.data;
   }
   catch (error) {
-    throw error
+    throw (error)
   }
 }
 
@@ -32,7 +31,7 @@ export const signup = async (username, password) => {
   }
 
   catch (error) {
-    throw error;
+    throw (error)
   }
 };
 
@@ -51,7 +50,7 @@ export const signin = async (username, password) => {
   }
 
   catch (error) {
-    throw error;
+    return (error)
   }
 };
 

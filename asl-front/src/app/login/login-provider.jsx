@@ -30,9 +30,10 @@ export default function LoginProivder() {
   const [login, setLogin] = useState(true)
 
   const router = useRouter();
+  console.log('In login provider, the auth is' + auth)
 
   useEffect(() => {
-    playModem()
+    if (auth === true) { playModem() }
   }, [auth])
 
   // if (login) {
@@ -74,7 +75,7 @@ export default function LoginProivder() {
 
   return (
     <div>
-      {auth ? <Dialup /> :
+      {(auth === true) ? <Dialup /> :
         <LoginContext.Provider value={{ login, setLogin }}>
           {login ?
             < Window title="A/S/L Sign On">

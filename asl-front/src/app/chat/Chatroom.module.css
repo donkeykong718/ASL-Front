@@ -52,6 +52,12 @@
   font-weight: bold;
 }
 
+.hostMessage {
+  color: red;
+  font-weight: bold;
+  margin: .25em;
+}
+
 .userList {
   font-weight: bold;
   font-size: 1.25em;

@@ -19,13 +19,14 @@ export default function Home() {
   }, [])
 
   return (
-  
+
     <Window title="A/S/L Channels">
       <Image src='/assets/images/aol-channels.jpg'
         width={700}
-        height={400} />
+        height={400}
+        alt="AOL channel page" />
       <button onClick={() => { router.push('/categories') }} className={style.chatChannel}>Chat!</button>
-      </Window>
-      
+    </Window>
+
   )
 }
