@@ -17,11 +17,11 @@
   color: white;
   border: white 1px solid;
   height: 10%;
-  width: 25%;
+  width: 30%;
   font-size: 2em;
   background-color: #026ca4;
   box-shadow: (30px 15px 10px #909495);
-  transform: translate(130%, 130%);
+  transform: translate(115%, 390%);
   padding: 0 10px;
 }
 

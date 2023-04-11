@@ -96,21 +96,19 @@
   justify-content: space-around;
   height: 35%;
   width: 100%;
-  border: 2px solid green;
   margin-top: 10px;
   overflow: hidden;
 }
 
 
 .submitButton {
-  position: relative;
-  /* transform: translate(525%, -150%); */
+  position: absolute;
+  transform: translate(200%, 60%);
   color: white;
-  height: 50px;
+  height: 45px;
   align-self: center;
-  font-size: 2.5em;
+  font-size: 2em;
   font-style: italic;
-
 }
 
 
