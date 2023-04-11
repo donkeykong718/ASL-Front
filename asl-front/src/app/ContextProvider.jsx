@@ -24,6 +24,9 @@ export default function ContextProvider({ children }) {
       const currentUser = JSON.parse(stringUser)
       setUser(currentUser);
       setAuth(true);
+      console.log('Auth is ' + auth)
+      console.log(user)
+
       // router.push('/home')
     }
     else {
@@ -32,9 +35,10 @@ export default function ContextProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  Window.onbeforeunload = function () {
-    localStorage.clear();
+  window.onbeforeunload = function () {
     setAuth(false);
+    setUser({})
+    localStorage.clear();
     return '';
   }
 
@@ -42,7 +46,7 @@ export default function ContextProvider({ children }) {
     <>
       <AuthContext.Provider value={{ auth, setAuth }}>
         <UserContext.Provider value={{ user, setUser }}>
-          <Window mainWindow='true' title={`Welcome to A/S/L!`} >{children}</Window>
+          <Window mainWindow='true' title={`Welcome to A/S/L! ${user ? `You are logged in as ${user.username}` : `You are not logged on`}`} >{children}</Window>
         </UserContext.Provider>
       </AuthContext.Provider>
     </>

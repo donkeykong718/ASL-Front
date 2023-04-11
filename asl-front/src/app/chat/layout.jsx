@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import Window from '../components/Window'
 import * as chatServices from '../api/services/chatrooms'
 import { UserContext } from '../ContextProvider';
@@ -23,11 +23,19 @@ export default function ChatLayout({ children }) {
   const [socketUrl, setSocketUrl] = useState('')
   // console.log("user token" + user.token)
 
+  const pathname = usePathname();
+  console.log(pathname)
+
+  let socketStart = 'wss';
+
+  if (typeof window !== 'undefined') {
+    if (window.location.hostname === 'localhost') { const socketStart = 'ws' }
+  }
 
   useEffect(() => {
     const stringuser = localStorage.getItem('user')
     const user = JSON.parse(stringuser)
-    setSocketUrl(`wss://asl-back.herokuapp.com/chats/${category}/${name}/?token=${user.token}`)
+    setSocketUrl(`${socketStart}://asl-back.herokuapp.com/chats/${category}/${name}/?token=${user.token}`)
   }, [])
 
   console.log(name);
