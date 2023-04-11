@@ -25,6 +25,10 @@ export default function Homepage() {
     )
   }
 
+  const onClick = () => {
+
+  }
+
   useEffect(() => {
     const getAllRooms = async () => {
       try {
@@ -46,8 +50,6 @@ export default function Homepage() {
   }, []);
 
   useEffect(() => {
-    // console.log(finalCategoryList);
-    // console.log(conversation);
   }, [finalCategoryList, conversation])
 
 
@@ -61,7 +63,6 @@ export default function Homepage() {
         setCategoryChoice={setCategoryChoice}
         finalCategoryList={finalCategoryList}
       />
-      <button className={styles.homeSearchButton}>Search</button>
       <CategoryScroll
         categoryOption={categoryOption}
         setCategoryOption={setCategoryOption}

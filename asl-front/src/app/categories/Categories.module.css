@@ -86,12 +86,12 @@
 
 .createRoomDisplay {
   position: relative;
-  top: -130px;
-  left: 50px;
 }
 
 .createRoomForm {
   position: relative;
+  top: -130px;
+  left: 50px;
 }
 
 .createRoomLabel {
@@ -120,4 +120,33 @@
 .highlighted {
   background-color: blue;
   color: white;
+}
+
+@media screen and (max-width: 768px) {
+
+  .categoryScrollDisplay {
+    position: relative;
+    left: 50px;
+    top: -10px;
+  }
+
+  .roomListDisplay {
+    position: relative;
+    top: -10px;
+    left: 50px;
+  }
+
+  .createRoomForm {
+    position: relative;
+    top: 10px;
+    left: 50px;
+  }
+
+  .homeSearchButton {
+    height: 15px;
+    position: absolute;
+    left: 265px;
+    top: 165px;
+    font-size: 15px;
+  }
 }

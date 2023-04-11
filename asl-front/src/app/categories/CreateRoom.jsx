@@ -8,43 +8,13 @@ export default function CreateRoom(props) {
   const inputRef = useRef()
   const selectRef = useRef()
 
-  // const createConversation = async (name, category) => {
-  //   try {
-  //     // const csrftoken = getCookie('csrftoken');
-  //     const response = await chatFunctions.createRoom({
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         // 'X-CSRFToken': csrftoken,
-  //         'Authorization': `Token ${localStorage.getItem('token')}`,
-  //       },
-  //       body: JSON.stringify({
-  //         name,
-  //         category,
-  //       }),
-  //     });
-  //     console.log('Response status:', response.status);
-  //     const responseBody = await response.text();
-  //     console.log('Response body:', responseBody);
-  //     if (!response.ok) {
-  //       throw new Error('Failed to create conversation.');
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const inputRoomName = inputRef.current.value
     const selectNewRoomCategory = selectRef.current.value
-    // console.log("Input Room Name:", inputRoomName)
-    // console.log("Selected Category:", selectNewRoomCategory)
     location.href = `/chat/${selectNewRoomCategory}/${inputRoomName}`
   }
-
-
 
   return (
     <>

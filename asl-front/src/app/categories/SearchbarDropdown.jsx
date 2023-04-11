@@ -16,8 +16,18 @@ export const SearchbarDropdown = (props) => {
     }
   }
 
+  // Press button and its value appears in the search bar
   const onClick = (e, value) => {
     setCategoryChoice([value])
+    inputRef.current.value = value
+  }
+
+  const handleClick = () => {
+    const value = inputRef.current.value
+    if (value) {
+      setCategoryChoice(finalCategoryList.filter(option =>
+        option.toLowerCase().includes(value.toLowerCase())))
+    }
   }
 
   const onMouseEnter = (index) => {
@@ -55,7 +65,6 @@ export const SearchbarDropdown = (props) => {
           <input
             className={styles.searchBarField}
             type="search"
-            // placeholder="Search"
             ref={inputRef}
             onChange={onInputChange}
           />
@@ -79,6 +88,10 @@ export const SearchbarDropdown = (props) => {
           })}
         </ul>
       </form>
+      <button
+        className={styles.homeSearchButton}
+        onClick={handleClick}
+      >Search</button>
     </div>
   )
 }
