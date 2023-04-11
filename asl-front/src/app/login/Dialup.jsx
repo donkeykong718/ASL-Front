@@ -6,7 +6,7 @@ import styles from '../dial-up/Dial-up.module.css'
 
 export default function Dialup() {
   const audioRef = useRef(null);
-  const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
+  // const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
 
   const [imageIndex, setImageIndex] = useState(0);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
