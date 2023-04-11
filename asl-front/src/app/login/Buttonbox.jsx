@@ -10,10 +10,6 @@ export default function ButtonBox() {
 
   const { login, setLogin } = useContext(LoginContext)
 
-  const rickRolls = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.youtube.com/watch?v=hGlyFc79BUE", "https://www.youtube.com/watch?v=q3XezETe7JY", "https://www.youtube.com/watch?v=Pk-kbjw0Y8U"]
-
-  const easterEgg = Math.floor(Math.random() * rickRolls.length);
-
   return (
     <div className={styles.loginBottomBtns}>
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target='_blank' >
@@ -23,7 +19,7 @@ export default function ButtonBox() {
       </a>
 
       <div className={styles.loginBottomBtns}>
-        <button onClick={() => { setLogin(false) }} className={styles.setupBtn}>
+        <button onClick={() => { login ? setLogin(false) : setLogin(true) }} className={styles.setupBtn}>
           <Image src="/assets/images/setupbtn.png" alt="Set Up Button"
             height={30}
             width={30} />

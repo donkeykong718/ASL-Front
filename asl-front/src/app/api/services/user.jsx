@@ -54,6 +54,20 @@ export const signin = async (username, password) => {
   }
 };
 
+export const deleteUrAccount = async (user) => {
+  try {
+    console.log(user)
+    const response = await api.delete(`/user/${user.id}`)
+    localStorage.clear();
+    console.log(`User ${username} has been deleted`)
+    return response.data;
+  }
+  catch (error) {
+    return (error)
+  }
+
+}
+
 export const logOff = () => {
   localStorage.clear();
 }

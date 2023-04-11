@@ -38,12 +38,9 @@ const formats = [
   'underline'
 ]
 
-// const currentUser = 'admin'
-// const currentPassword = 'password'
 
 export default function Chatroom() {
 
-  const [room, setRoom] = useState({});
   const { user, setUser } = useContext(UserContext);
   const { socketUrl, setSocketUrl } = useContext(SocketContext)
   // const [user, setUser] = useState({})
@@ -52,17 +49,7 @@ export default function Chatroom() {
   const [messageHistory, setMessageHistory] = useState([])
   const [hasMoreMessages, setHasMoreMessages] = useState(false)
   const [pcpts, setParticipants] = useState([])
-  const [conversation, setConversation] = useState(null);
-  const [page, setPage] = useState(2)
 
-  // const router = useRouter();
-
-  // const userString = localStorage.getItem("user")
-  // const userJSON = JSON.parse(userString)
-  // console.log('The user is:')
-  // setUser(userJSON);
-  // console.log(user)
-  // const { name } = useParams();
 
 
   const { category, name } = useParams();
@@ -168,20 +155,6 @@ export default function Chatroom() {
     fetchMessages()
   }, [])
 
-  // async function checkPage() {
-  //   const result = await chatFunctions.getaRoom(name)
-  //   if (result.status === 200) {
-  //     const roomInfo = await result.json();
-  //     setRoom(roomInfo)
-  //   }
-  // else {
-  //   router.push('/404')
-  // }
-  // }
-
-  // useEffect(() => {
-  //   fetchMessages();
-  // }, [])
 
   const handleSubmit = () => {
     let message = value;
@@ -191,7 +164,12 @@ export default function Chatroom() {
       message,
     });
     setValue("");
-    // playSend();
+  }
+
+  const handleDelete = async () => {
+    confirm(`Are you sure you want to delete ${user.username}?`)
+    const deletedUser = await userFunctions.deleteUrAccount(user);
+    console.log(deletedUser)
   }
 
   useEffect(() => { playReceive() }
@@ -223,6 +201,7 @@ export default function Chatroom() {
             </div>
           </>}
       </div>
+      <p>If you ever get pwned too badly:</p><Link onClick={handleDelete} href='/login'>Delete ur account</Link>
     </div>
   )
 }
