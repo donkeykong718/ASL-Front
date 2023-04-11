@@ -9,8 +9,8 @@ export default function LogoBox() {
         <Image
           src="/assets/images/cool-man.png"
           alt=""
-          height={200}
-          width={200}
+          height={150}
+          width={150}
           className={styles.logo}
         />
       </div>
@@ -18,8 +18,8 @@ export default function LogoBox() {
         <Image
           src="/assets/images/ASL-logo-text.png"
           alt=""
-          height={75}
-          width={200}
+          height={50}
+          width={150}
           className={styles.ASLLogo}
         />
       </div>

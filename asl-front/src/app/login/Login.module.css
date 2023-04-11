@@ -20,6 +20,14 @@
 
 }
 
+.LoginContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
 .titleBar {
   /* display: flex; */
   /* align-items: center; */
