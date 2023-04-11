@@ -9,6 +9,7 @@ import { useSound } from "use-sound";
 import * as userFunctions from '../api/services/user'
 
 
+
 export default function Window({ children, mainWindow, title }) {
 
   const [playGoodbye] = useSound("/assets/sounds/Goodbye.wav");
@@ -91,6 +92,8 @@ export default function Window({ children, mainWindow, title }) {
         windowElement.removeEventListener("mouseup", handleMouseUp);
       };
     }
+  
+
   }, []);
 
   return (
@@ -140,7 +143,12 @@ export default function Window({ children, mainWindow, title }) {
         <Image id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' alt='toolbar'
           width={700}
           height={60}
-        /> </> : <></>}
+          />
+
+
+        
+        
+        </> : <></>}
 
       <div className='window-body'>
         {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
