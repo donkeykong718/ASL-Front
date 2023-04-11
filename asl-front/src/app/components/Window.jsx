@@ -33,67 +33,68 @@ export default function Window({ children, mainWindow, title }) {
   // }
   useEffect(() => {
     const windowElement = windowRef.current;
-    if (windowElement) {
-      let isDragging = false;
-      let originalX;
-      let originalY;
+    // if (windowElement) {
+    //   let isDragging = false;
+    //   let originalX;
+    //   let originalY;
 
-      const handleMouseDown = (event) => {
-        // check if the mouse down event occurred on the window title bar
-        if (event.target.classList.contains("title-bar")) {
-          isDragging = true;
-          originalX = event.clientX;
-          originalY = event.clientY;
+    //   const handleMouseDown = (event) => {
+    //     // check if the mouse down event occurred on the window title bar
+    //     if (event.target.classList.contains("title-bar")) {
+    //       isDragging = true;
+    //       originalX = event.clientX;
+    //       originalY = event.clientY;
 
-          // add styles to the window element to make it draggable
-          windowElement.style.userSelect = "none";
-          windowElement.style.cursor = "grabbing";
-        }
-      };
+    //       // add styles to the window element to make it draggable
+    //       windowElement.style.userSelect = "none";
+    //       windowElement.style.cursor = "grabbing";
+    //     }
+    //   };
 
-      const handleMouseMove = (event) => {
-        if (!isDragging) {
-          return;
-        }
+    //   const handleMouseMove = (event) => {
+    //     if (!isDragging) {
+    //       return;
+    //     }
 
-        // calculate the new window position based on the mouse position
-        const newLeft = windowElement.offsetLeft + event.movementX;
-        const newTop = windowElement.offsetTop + event.movementY;
-        console.log(`Window offset left is ${windowElement.offsetLeft}`);
-        console.log(`Window offset top is ${windowElement.offsetTop}`)
-        console.log(`Event movement X is ${event.movementX}`)
-        console.log(`Event movement Y is ${event.movementY}`)
-        console.log(newLeft);
-        console.log(newTop);
+    //     // calculate the new window position based on the mouse position
+    //     const newLeft = windowElement.offsetLeft + event.movementX;
+    //     const newTop = windowElement.offsetTop + event.movementY;
+    //     console.log(`Window offset left is ${windowElement.offsetLeft}`);
+    //     console.log(`Window offset top is ${windowElement.offsetTop}`)
+    //     console.log(`Event movement X is ${event.movementX}`)
+    //     console.log(`Event movement Y is ${event.movementY}`)
+    //     console.log(newLeft);
+    //     console.log(newTop);
 
-        // set the new position of the window element
-        windowElement.style.left = `${newLeft}}px`;
-        windowElement.style.top = `${newTop}px`;
-      };
+    //     // set the new position of the window element
+    //     windowElement.style.left = `${newLeft}}px`;
+    //     windowElement.style.top = `${newTop}px`;
+    //   };
 
-      const handleMouseUp = () => {
-        isDragging = false;
+    //   const handleMouseUp = () => {
+    //     isDragging = false;
 
-        // remove the draggable styles from the window element
-        windowElement.style.userSelect = "";
-        windowElement.style.cursor = "";
-      };
+    //     // remove the draggable styles from the window element
+    //     windowElement.style.userSelect = "";
+    //     windowElement.style.cursor = "";
+    //   };
 
-      // add event listeners to handle dragging the window
-      windowElement.addEventListener("mousedown", handleMouseDown);
-      windowElement.addEventListener("mousemove", handleMouseMove);
-      windowElement.addEventListener("mouseup", handleMouseUp);
+    //   // add event listeners to handle dragging the window
+    //   windowElement.addEventListener("mousedown", handleMouseDown);
+    //   windowElement.addEventListener("mousemove", handleMouseMove);
+    //   windowElement.addEventListener("mouseup", handleMouseUp);
 
-      return () => {
-        // remove the event listeners when the component is unmounted
-        windowElement.removeEventListener("mousedown", handleMouseDown);
-        windowElement.removeEventListener("mousemove", handleMouseMove);
-        windowElement.removeEventListener("mouseup", handleMouseUp);
-      };
+      // return () => {
+      //   // remove the event listeners when the component is unmounted
+      //   windowElement.removeEventListener("mousedown", handleMouseDown);
+      //   windowElement.removeEventListener("mousemove", handleMouseMove);
+      //   windowElement.removeEventListener("mouseup", handleMouseUp);
+      // };
     }
-  }, []);
+  , []);
 
   return (
+    <div className= 'main'>
     <div className="window" ref={windowRef}>
       <div className="title-bar">
         <div className="title-bar-text">
@@ -141,7 +142,6 @@ export default function Window({ children, mainWindow, title }) {
           width={700}
           height={60}
         /> </> : <></>}
-
       <Suspense fallback={<Loading />}>
         <div className='window-body'>
           {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
