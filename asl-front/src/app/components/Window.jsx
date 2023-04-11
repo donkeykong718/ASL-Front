@@ -84,71 +84,72 @@ export default function Window({ children, mainWindow, title }) {
     //   windowElement.addEventListener("mousemove", handleMouseMove);
     //   windowElement.addEventListener("mouseup", handleMouseUp);
 
-      // return () => {
-      //   // remove the event listeners when the component is unmounted
-      //   windowElement.removeEventListener("mousedown", handleMouseDown);
-      //   windowElement.removeEventListener("mousemove", handleMouseMove);
-      //   windowElement.removeEventListener("mouseup", handleMouseUp);
-      // };
-    }
-  , []);
+    // return () => {
+    //   // remove the event listeners when the component is unmounted
+    //   windowElement.removeEventListener("mousedown", handleMouseDown);
+    //   windowElement.removeEventListener("mousemove", handleMouseMove);
+    //   windowElement.removeEventListener("mouseup", handleMouseUp);
+    // };
+  }
+    , []);
 
   return (
-    <div className= 'main'>
-    <div className="window" ref={windowRef}>
-      <div className="title-bar">
-        <div className="title-bar-text">
-          <Image
-            width={20}
-            height={20}
-            style={{ marginRight: '5px' }} src='/assets/images/cool-man.png' alt='logo' />
-          {title}{/* Welcome to A/S/L. You are logged in as: {user} */}
-        </div>
-        <div className="title-bar-controls">
-          <button aria-label="Minimize"></button>
-          <button aria-label="Maximize"></button>
-          <button aria-label="Close"></button>
-        </div>
-      </div>
-
-      {mainWindow ? <>
-        <div className="title-bar" style={{ background: '#c0bfbe', height: "1.25em" }}>
-          {/* <img style={{ height: '1em', marginRight: '5px', display: 'inline' }} src='assets/images/cool-man.png' /> */}
-          <ul className="title-bar-text" style={{ color: '#605e60', listStyle: 'none', display: 'flex' }}>
-            <li ><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>F</span>ile</li>
-            <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>E</span>dit</li>
-            <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>W</span>indow</li>
-
-            <li className="signoff" onClick={() => {
-              playGoodbye()
-              setUser({})
-              setAuth(false)
-              userFunctions.logOff()
-              console.log('Sign off has been clicked')
-              // console.log(localStorage.getItem('user'));
-              router.push('/login')
-            }}>
-
-              <span style={{ textDecoration: 'underline', marginLeft: '10px' }}>S</span>ign Off</li>
-            <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>H</span>elp</li>
-          </ul>
+    <div className='main'>
+      <div className="window" ref={windowRef}>
+        <div className="title-bar">
+          <div className="title-bar-text">
+            <Image
+              width={20}
+              height={20}
+              style={{ marginRight: '5px' }} src='/assets/images/cool-man.png' alt='logo' />
+            {title}{/* Welcome to A/S/L. You are logged in as: {user} */}
+          </div>
           <div className="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
-            <button onClick={() => { windowRef.parentNode.removeChild(windowRef) }} aria-label="Close"></button>
+            <button aria-label="Close"></button>
           </div>
         </div>
-        <Image id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' alt='toolbar'
-          width={700}
-          height={60}
-        /> </> : <></>}
-      <Suspense fallback={<Loading />}>
-        <div className='window-body'>
-          {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
-          {children}
-          {/* </AuthContext.Provider> */}
-        </div>
-      </Suspense>
+
+        {mainWindow ? <>
+          <div className="title-bar" style={{ background: '#c0bfbe', height: "1.25em" }}>
+            {/* <img style={{ height: '1em', marginRight: '5px', display: 'inline' }} src='assets/images/cool-man.png' /> */}
+            <ul className="title-bar-text" style={{ color: '#605e60', listStyle: 'none', display: 'flex' }}>
+              <li ><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>F</span>ile</li>
+              <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>E</span>dit</li>
+              <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>W</span>indow</li>
+
+              <li className="signoff" onClick={() => {
+                playGoodbye()
+                setUser({})
+                setAuth(false)
+                userFunctions.logOff()
+                console.log('Sign off has been clicked')
+                // console.log(localStorage.getItem('user'));
+                router.push('/login')
+              }}>
+
+                <span style={{ textDecoration: 'underline', marginLeft: '10px' }}>S</span>ign Off</li>
+              <li><span style={{ textDecoration: 'underline', marginLeft: '10px' }}>H</span>elp</li>
+            </ul>
+            <div className="title-bar-controls">
+              <button aria-label="Minimize"></button>
+              <button aria-label="Maximize"></button>
+              <button onClick={() => { windowRef.parentNode.removeChild(windowRef) }} aria-label="Close"></button>
+            </div>
+          </div>
+          <Image id='dummy-toolbar' src='/assets/images/dummy_toolbar.png' alt='toolbar'
+            width={700}
+            height={60}
+          /> </> : <></>}
+        <Suspense fallback={<Loading />}>
+          <div className='window-body'>
+            {/* <AuthContext.Provider value={{ auth, setAuth }}> */}
+            {children}
+            {/* </AuthContext.Provider> */}
+          </div>
+        </Suspense>
+      </div>
     </div>
   )
 }
