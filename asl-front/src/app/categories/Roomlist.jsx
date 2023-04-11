@@ -5,22 +5,31 @@ import styles from './Categories.module.css';
 
 export const RoomList = (props) => {
   const { categoryOption, finalCategoryList, conversation } = props;
+  const buttonRefs = useRef([]);
 
-  // console.log(conversation);
-  // console.log(categoryOption);
+  const onMouseEnter = (index) => {
+    buttonRefs.current[index].classList.add(styles.highlighted);
+  }
+
+  const onMouseLeave = (index) => {
+    buttonRefs.current[index].classList.remove(styles.highlighted);
+  }
 
   const setButtons = () => {
     let buttons = null;
     if (categoryOption === "") {
-      buttons = conversation.map((option) => {
+      buttons = conversation.map((option, index) => {
         return (
-          <tr>
+          <tr key={option.id}>
             <button
               type="button"
-              key={option.id}
               className={styles.roomButtons}
               onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
-            >{option.name}
+              ref={ref => buttonRefs.current[index] = ref}
+              onMouseEnter={() => onMouseEnter(index)}
+              onMouseLeave={() => onMouseLeave(index)}
+            >
+              {option.name}
             </button>
           </tr>
         );
@@ -28,15 +37,18 @@ export const RoomList = (props) => {
     } else {
       buttons = conversation
         .filter((option) => option.category === categoryOption)
-        .map((option) => {
+        .map((option, index) => {
           return (
-            <tr>
+            <tr key={option.id}>
               <button
                 type="button"
-                key={option.id}
                 className={styles.roomButtons}
                 onClick={() => { location.href = `/chat/${option.category}/${option.name}` }}
-              >{option.name}
+                ref={ref => buttonRefs.current[index] = ref} // Set the ref for the button
+                onMouseEnter={() => onMouseEnter(index)} // Pass the index to onMouseEnter
+                onMouseLeave={() => onMouseLeave(index)} // Pass the index to onMouseLeave
+              >
+                {option.name}
               </button>
             </tr>
           )

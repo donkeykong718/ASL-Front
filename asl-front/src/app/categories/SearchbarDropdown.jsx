@@ -5,7 +5,7 @@ export const SearchbarDropdown = (props) => {
   const { options, onInputChange, categoryChoice, finalCategoryList, setCategoryChoice } = props;
   const ulRef = useRef()
   const inputRef = useRef()
-  const buttonRef = useRef([])
+  const buttonRefs = useRef([])
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -18,6 +18,14 @@ export const SearchbarDropdown = (props) => {
 
   const onClick = (e, value) => {
     setCategoryChoice([value])
+  }
+
+  const onMouseEnter = (index) => {
+    buttonRefs.current[index].current.classList.add(styles.highlighted)
+  }
+
+  const onMouseLeave = (index) => {
+    buttonRefs.current[index].current.classList.remove(styles.highlighted)
   }
 
   useEffect(() => {
@@ -54,14 +62,16 @@ export const SearchbarDropdown = (props) => {
         </div>
         <ul className={styles.searchBarList} ref={ulRef}>
           {options.map((option, index) => {
-            buttonRef.current[index] = React.createRef()
+            buttonRefs.current[index] = React.createRef()
             return (
               <button
                 className={styles.searchBarListItem}
                 type="submit"
                 key={index}
                 onClick={(e) => onClick(e, option)}
-                ref={buttonRef.current[index]}
+                ref={buttonRefs.current[index]}
+                onMouseEnter={() => onMouseEnter(index)}
+                onMouseLeave={() => onMouseLeave(index)}
               >
                 {option}
               </button>

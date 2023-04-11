@@ -3,15 +3,23 @@ import styles from './Categories.module.css';
 
 export const CategoryScroll = (props) => {
   const { categoryChoice, categoryOption, finalCategoryList, setCategoryOption } = props;
+  const buttonRefs = useRef([]);
+
   const onClick = (e) => {
     const value = e.target.value;
     setCategoryOption(value)
   }
 
   useEffect(() => {
-    // console.log(categoryOption);
   }, [categoryOption])
 
+  const onMouseEnter = (index) => {
+    buttonRefs.current[index].classList.add(styles.highlighted);
+  }
+
+  const onMouseLeave = (index) => {
+    buttonRefs.current[index].classList.remove(styles.highlighted);
+  }
 
   const categories = categoryChoice.length > 0 ? categoryChoice : finalCategoryList;
 
@@ -29,14 +37,17 @@ export const CategoryScroll = (props) => {
               </tr>
             </thead>
             <tbody>
-              {categories.map(choice => {
+              {categories.map((choice, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <button
                       className={styles.categoryScrollOptions}
                       onClick={onClick}
                       value={choice}
                       type="button"
+                      ref={ref => buttonRefs.current[index] = ref}
+                      onMouseEnter={() => onMouseEnter(index)}
+                      onMouseLeave={() => onMouseLeave(index)}
                     >
                       {choice}
                     </button>

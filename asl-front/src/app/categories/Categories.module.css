@@ -1,72 +1,3 @@
-/* .searchBarLabel {
-  font-size: 15px;
-  font-weight: bolder;
-}
-
-.searchBarField {
-  width: 250px;
-  height: 30px;
-}
-
-
-.searchBarList {
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-}
-
-.searchBarListItem {
-  background-color: #fff;
-}
-
-.roomListHeader {
-  width: 280px;
-  font-size: 20px;
-  font-weight: bolder;
-  height: 30px;
-}
-
-.roomButtons {
-  width: 310px;
-  text-align: left;
-  font-size: 15px;
-  background-color: #fff;
-}
-
-.categoryHeader {
-  width: 240px;
-  font-size: 20px;
-  font-weight: bolder;
-  height: 30px;
-}
-
-.categoryScrollOptions {
-  width: 240px;
-  text-align: left;
-  font-size: 15px;
-  background-color: #fff;
-}
-
-.createRoomDisplay {
-  position: absolute;
-  top: 250px;
-  right: 50px;
-}
-
-.createRoomForm {
-  position: absolute;
-  top: 250px;
-  right: 50px;
-}
-
-.homeSearchButton {
-  height: 30px;
-  position: relative;
-  left: 255px;
-  bottom: 30px;
-  font-size: 15px;
-} */
-
 .container {
   display: flex;
   flex-direction: column;
@@ -184,4 +115,9 @@
   left: 320px;
   top: 191px;
   font-size: 15px;
+}
+
+.highlighted {
+  background-color: blue;
+  color: white;
 }
