@@ -6,6 +6,7 @@ import { CategoryScroll } from './Categoryscroll'
 import { RoomList } from './Roomlist'
 import CreateRoom from './CreateRoom'
 import * as chatFunctions from '../api/services/chatrooms'
+import styles from './Categories.module.css'
 
 export default function Homepage() {
 
@@ -52,7 +53,7 @@ export default function Homepage() {
 
   return (
     <div className="home-parent">
-      <h3 className="home-search">Search Bar Dropdown</h3>
+      <h3 className={styles.homeSearchTitle}>Chat Room Listings</h3>
       <SearchbarDropdown
         options={options}
         onInputChange={onInputChange}
@@ -60,7 +61,7 @@ export default function Homepage() {
         setCategoryChoice={setCategoryChoice}
         finalCategoryList={finalCategoryList}
       />
-      <button className="home-search-button">Search</button>
+      <button className={styles.homeSearchButton}>Search</button>
       <CategoryScroll
         categoryOption={categoryOption}
         setCategoryOption={setCategoryOption}

@@ -50,13 +50,14 @@ export default function CreateRoom(props) {
     <>
       <div className={styles.createRoomDisplay} class="field-row-stacked" style={{ width: "200px" }}>
         <form className={styles.createRoomForm} onSubmit={handleSubmit}>
-          <label for="createRoomInput">Start Your Own Chat!</label>
+          <label className={styles.createRoomLabel} for="createRoomInput">Start Your Own Chat!</label>
           <input
+            className={styles.createRoomInput}
             id="createRoomInput"
             type="text"
             ref={inputRef}
           />
-          <select className='createRoomCategoryDrop' ref={selectRef}>
+          <select className={styles.createRoomCategoryDrop} ref={selectRef}>
             {finalCategoryList.map((option) => {
               return (
                 <option key={option} value={option}>
@@ -65,7 +66,7 @@ export default function CreateRoom(props) {
               )
             })}
           </select>
-          <button type="submit">Create Room</button>
+          <button className={styles.createRoomButton} type="submit">Create Room</button>
         </form>
       </div>
     </>
