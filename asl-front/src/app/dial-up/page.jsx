@@ -6,7 +6,7 @@ import styles from "./Dial-up.module.css";
 import { useRouter } from "next/router";
 
 export default function DialUp() {
-  const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
+  // const [playModem] = useSound("/assets/sounds/dial-up-modem.wav");
 
   const [imageIndex, setImageIndex] = useState(0);
   const [isAnimationPlaying, setIsAnimationPlaying] = useState(false);
