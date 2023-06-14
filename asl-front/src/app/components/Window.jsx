@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useSound } from "use-sound";
 // import coolMan from '../../../public/assets/images / cool - man.png'
 import * as userFunctions from '../api/services/user'
-import Loading from '../components/Loading'
+import Loading from './Loading'
 
 export default function Window({ children, mainWindow, title }) {
 
