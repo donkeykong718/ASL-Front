@@ -17,7 +17,6 @@
   padding: 3px;
   z-index: 1;
   border: 1px solid #ccc;
-
 }
 
 .LoginContainer {
@@ -38,9 +37,11 @@
   /* width: 10%; */
 
   background: linear-gradient(to bottom, #2871d1, #1c3a6f);
-  background: linear-gradient(90deg,
-      var(--dialog-blue),
-      var(--dialog-blue-light));
+  background: linear-gradient(
+    90deg,
+    var(--dialog-blue),
+    var(--dialog-blue-light)
+  );
   padding: 3px 2px 3px 3px;
   display: flex;
   justify-content: space-between;
@@ -48,17 +49,15 @@
   font-family: "Pixelated MS Sans Serif", Arial;
   -webkit-font-smoothing: none;
   font-size: 11px;
-
 }
 
 .titleBarIcon {
   margin-right: 13px;
-  background-color: #005BAB;
+  background-color: #005bab;
   height: 10%;
   width: 10%;
   opacity: 1;
 }
-
 
 .titleBarText {
   /* width: 180px; */
@@ -66,7 +65,6 @@
   color: white;
   letter-spacing: 0;
   margin-right: 170px;
-
 }
 
 /* .titleBarControls {
@@ -161,7 +159,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #005BAB;
+  background-color: #005bab;
   margin-top: 10px;
   margin-left: 5px;
   margin-right: 10px;
@@ -174,7 +172,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #005BAB;
+  background-color: #005bab;
   opacity: 1;
 }
 
@@ -206,8 +204,8 @@
 }
 
 .helpBtn {
-  width: 19px;
-  height: 35px;
+  width: 50px;
+  height: 40px;
   border: none;
   cursor: pointer;
   /* margin-left: 10px;
@@ -219,18 +217,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35px;
+  height: 40px;
+  width: 50px;
   /* width: 25px;
 min-width: 25px; */
 }
 
 .signupBtn {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 35px;
+  height: 40px;
+  width: 50px;
 }
 
 .signOnBtn:disabled {
   filter: grayscale();
+}
+
+.signonText {
+  font-size: 0.9em;
+}
+
+.underline {
+  text-decoration: underline;
 }

@@ -31,7 +31,7 @@ export default function ChatLayout({ children }) {
   let socketStart = 'wss';
 
   if (typeof window !== 'undefined') {
-    if (window.location.hostname === 'localhost') { socketStart = 'ws' }
+    if (window.location.hostname === 'localhost') { socketStart = 'wss' }
   }
 
   useEffect(() => {
